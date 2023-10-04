@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: left;
+  background-color: var(--mainGreen);
+}
+.nav {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.nav a {
+  color: var(--black);
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  background: var(--secondaryGreen);
+}
