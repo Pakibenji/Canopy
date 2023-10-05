@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "./RegisterForm.module.css";

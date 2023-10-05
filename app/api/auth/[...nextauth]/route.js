@@ -26,7 +26,6 @@ export const authOptions = {
           if (!passwordsMatch) {
             return null;
           }
-
           return user;
         } catch (error) {
           console.log("Error: ", error);
@@ -34,6 +33,20 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user._id = token._id;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token._id = user._id;
+      }
+      return token;
+    },
+  },
   session: {
     strategy: "jwt",
   },
@@ -42,7 +55,6 @@ export const authOptions = {
     signIn: "/",
   },
 };
-
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

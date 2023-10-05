@@ -8,6 +8,7 @@ export const metadata= {
     "L'application de jardinage qui favorise le partage, l'échange de plantes et la tranquillité dans le monde de la botanique.",
 };
 
+
 export default function RootLayout({
   children,
 }) {
