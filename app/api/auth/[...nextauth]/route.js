@@ -3,6 +3,7 @@ import User from "@/models/user";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import { getServerSession } from "next-auth/next";
 
 export const authOptions = {
   providers: [
@@ -56,5 +57,5 @@ export const authOptions = {
   },
 };
 const handler = NextAuth(authOptions);
-
+export const getNextServerSession = () => getServerSession(authOptions);
 export { handler as GET, handler as POST };
