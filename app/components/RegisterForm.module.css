@@ -44,13 +44,6 @@
   cursor: pointer;
 }
 
-.error {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
 .link {
   display: flex;
   justify-content: center;

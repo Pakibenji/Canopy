@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const AddPlant = () => {
-  const { data: session, status } = useSession();
+  const { data: session} = useSession();
   const router = useRouter();
   const handleAddPlant = () => {
     router.push("/plants/add");

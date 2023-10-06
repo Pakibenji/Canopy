@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth/next";
 
+
 export const authOptions = {
   providers: [
     CredentialsProvider({

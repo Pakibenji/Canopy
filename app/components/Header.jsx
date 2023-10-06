@@ -7,7 +7,7 @@ import { subTitle } from "../fonts";
 import { useSession } from "next-auth/react";
 
 const Header = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   function buttonDisplay() {
     if (session) {

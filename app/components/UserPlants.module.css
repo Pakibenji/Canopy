@@ -1,0 +1,11 @@
+.seePlantsButton {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    color: var(--black);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--secondaryGreen);
+    border: none;
+}

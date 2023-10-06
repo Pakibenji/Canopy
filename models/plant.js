@@ -19,6 +19,10 @@ const PlantSchema = new Schema(
             ref: "User",
             required: true,
         },
+        proprietary: {
+            type: String,
+            required: true,
+        },
     },
     { timestamps: true }
 );
