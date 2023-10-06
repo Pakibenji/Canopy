@@ -7,8 +7,8 @@ const DisplayAllPlants = ({ plant, session }) => {
   return (
     <div className={styles.plantContainer}>
       <h3 style={subTitle.style} className={styles.plantName}>{name}</h3>
-      <p className={styles.plantType}>{type}</p>
       <img className={styles.plantImage} src={plantImage} alt="plantImage" />
+      <p className={styles.plantType}>{type}</p>
       <p className={styles.plantProprietary}>{proprietary}</p>
     </div>
   );
