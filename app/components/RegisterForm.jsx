@@ -1,88 +1,96 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import styles from "./RegisterForm.module.css";
+import styles from "./Form.module.css";
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+  validateConfirmPassword,
+} from "@/utils/validation";
+import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
 
 const RegisterForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    message: "",
+    error: "",
+  });
   const router = useRouter();
-
-  function isValid() {
-    if (password !== confirmPassword) {
-      setError("Passwords do not match");
-      return false;
-    }
-    if (!email.includes("@")) {
-      setError("Invalid email");
-      return false;
-    }
-    if (password.length < 7) {
-      setError("Password must be at least 7 characters");
-      return false;
-    }
-    if (password === password.toUpperCase()) {
-      setError("Password must contain a lowercase character");
-      return false;
-    }
-    if (password === password.toLowerCase()) {
-      setError("Password must contain an uppercase character");
-      return false;
-    }
-    return true;
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isValid()) {
-      try {
-        const resUserExists = await fetch("/api/userExists", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
-        });
-        const user = await resUserExists.json();
-        if (user != null) {
-          setError("User already exists");
-          return;
-        }
-        const res = await fetch("/api/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password }),
-        });
-        if (res.ok) {
-          const user = await res.json();
-          console.log(user);
-          setName("");
-          setEmail("");
-          setPassword("");
-          setConfirmPassword("");
-          setError("");
-          router.push("/");
-        } else {
-          setError("Something went wrong");
-        }
-      } catch (err) {
-        console.log(err);
+    const { name, email, password } = formData;
+    const nameError = validateName(name);
+    if (nameError) {
+      setFormData({ ...formData, error: nameError });
+      return;
+    }
+    const emailError = validateEmail(email);
+    if (emailError) {
+      setFormData({ ...formData, error: emailError });
+      return;
+    }
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setFormData({ ...formData, error: passwordError });
+      return;
+    }
+    const confirmPasswordError = validateConfirmPassword(
+      password,
+      formData.confirmPassword
+    );
+    if (confirmPasswordError) {
+      setFormData({ ...formData, error: confirmPasswordError });
+      return;
+    }
+    try {
+      const resUserExists = await fetch("/api/userExists", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const user = await resUserExists.json();
+      if (user != null) {
+        setError("User already exists");
+        return;
       }
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      if (res.ok) {
+        const user = await res.json();
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          message: "User created",
+          error: "",
+        });
+        router.push("/login");
+      } else {
+        setError("Something went wrong");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
     <>
-      <form action="" onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.labelDiv}>
           <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </div>
         <div className={styles.labelDiv}>
@@ -90,8 +98,10 @@ const RegisterForm = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
           />
         </div>
         <div className={styles.labelDiv}>
@@ -99,8 +109,10 @@ const RegisterForm = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
           />
         </div>
         <div className={styles.labelDiv}>
@@ -108,15 +120,17 @@ const RegisterForm = () => {
           <input
             type="password"
             id="confirm-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={formData.confirmPassword}
+            onChange={(e) =>
+              setFormData({ ...formData, confirmPassword: e.target.value })
+            }
           />
         </div>
-        {error && <div className={styles.error}>{error}</div>}
+        <DisplayErrorOrMessage
+          error={formData?.error}
+          message={formData?.message}
+        />
         <button type="submit">Register</button>
-        <div className={styles.link}>
-          <Link href="/login">go to login page</Link>
-        </div>
       </form>
     </>
   );

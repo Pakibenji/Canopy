@@ -1,19 +1,33 @@
 "use client";
-import React, {useState } from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import styles from "./RegisterForm.module.css";
+import styles from "./Form.module.css";
+import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
+import { validateEmail, validatePassword } from "@/utils/validation";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    message: "",
+    error: "",
+  });
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { email, password } = formData;
+    const emailError = validateEmail(email);
+    if (emailError) {
+      setFormData({ ...formData, error: emailError });
+      return;
+    }
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setFormData({ ...formData, error: passwordError });
+      return;
+    }
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -21,9 +35,16 @@ const LoginForm = () => {
         password,
       });
       if (res?.error) {
-        setError(res.error);
+        setFormData({ ...formData, error: res.error });
         return;
       }
+      setFormData({
+        ...formData,
+        email: "",
+        password: "",
+        message: "You have successfully logged in!",
+        error: "",
+      });
       router.push("/");
     } catch (error) {
       console.log(error);
@@ -38,8 +59,10 @@ const LoginForm = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             required
           />
         </div>
@@ -48,16 +71,18 @@ const LoginForm = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
             required
           />
         </div>
-        {error && <div className={styles.error}>{error}</div>}
+        <DisplayErrorOrMessage
+          error={formData?.error}
+          message={formData?.message}
+        />
         <button type="submit">Login</button>
-        <div className={styles.link}>
-          <Link href="/register">Go to register page</Link>
-        </div>
       </form>
     </>
   );

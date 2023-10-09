@@ -43,16 +43,3 @@
   font-weight: bold;
   cursor: pointer;
 }
-
-.link {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-  color: var(--white);
-  cursor: pointer;
-}
-
-.link a {
-  color: var(--white);
-  text-decoration: none;
-}

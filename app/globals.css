@@ -25,3 +25,20 @@
     text-align: center;
     margin: 1rem 0 1rem 0;
   }
+
+  .link {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+  
+  .link a {
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .link a:hover {
+    text-decoration: underline;
+    color: var(--mainGreen);
+  }

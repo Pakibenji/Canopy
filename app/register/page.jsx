@@ -3,6 +3,7 @@ import RegisterForm from "../components/RegisterForm";
 import Header from "../components/Header";
 import styles from "../page.module.css";
 import { subTitle } from "../fonts";
+import Link from "next/link";
 
 const Register = () => {
   return (
@@ -12,6 +13,9 @@ const Register = () => {
         Register
       </h2>
       <RegisterForm />
+      <div className="link" style={subTitle.style}>
+        <Link href="/login">go to login page</Link>
+      </div>
     </>
   );
 };
