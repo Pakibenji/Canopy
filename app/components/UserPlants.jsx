@@ -4,6 +4,7 @@ import DisplayUserPlants from "./DisplayUserPlants";
 import IsLoading from "./IsLoading";
 import styles from "./UserPlants.module.css";
 import { subTitle } from "../fonts";
+import Button from "./Button";
 
 const UserPlants = () => {
   const [myPlantsArray, setMyPlantsArray] = useState([]);
@@ -42,13 +43,7 @@ const UserPlants = () => {
 
   return (
     <>
-      <button
-        onClick={toggleDisplay}
-        className={styles.seePlantsButton}
-        style={subTitle.style}
-      >
-        See my plants
-      </button>
+      <Button func={toggleDisplay} name="my plants" />
       {isDisplaying ? displayPlants() : null}
     </>
   );

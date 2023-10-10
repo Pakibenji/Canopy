@@ -1,17 +1,19 @@
-import Plant from "@models/plant";
-import { connectToDb } from "@/utils";
+import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
+import { connectMongoDB } from "@/lib/mongodb";
 
-export async function PATCH({ params, request }) {
-  const db = await connectToDb();
+export const PATCH = async (req, { params }) => {
   const { id } = params;
-  const { name, description } = await request.body.json();
-
-  const plant = await Plant.findOneAndUpdate(
-    { _id: id },
-    { name, description },
-    { new: true }
-  );
-
-  return new NextResponse(plant);
-}
+  const body = await req.json();
+  try {
+    await connectMongoDB();
+    const updatedPlant = await Plant.findOneAndUpdate(
+      { _id: id },
+      { ...body },
+      { new: true }
+    );
+    return NextResponse.json("Plant successfully edited", { status: 200 });
+  } catch (error) {
+    return new NextResponse.json(error.message, { status: 500 });
+  }
+};

@@ -5,7 +5,8 @@ import { signIn } from "next-auth/react";
 import styles from "./Form.module.css";
 import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
 import { validateEmail, validatePassword } from "@/utils/validation";
-
+import FormButton from "./FormButton";
+import FormField from "./FormField";
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -54,35 +55,25 @@ const LoginForm = () => {
   return (
     <>
       <form action="" onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.labelDiv}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-            required
-          />
-        </div>
-        <div className={styles.labelDiv}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            required
-          />
-        </div>
+      <FormField
+          label="Email"
+          type="email"
+          id="email"
+          value={formData.email}
+          onChange={(value) => setFormData({ ...formData, email: value })}
+        />
+        <FormField
+          label="Password"
+          type="password"
+          id="password"
+          value={formData.password}
+          onChange={(value) => setFormData({ ...formData, password: value })}
+        />
         <DisplayErrorOrMessage
           error={formData?.error}
           message={formData?.message}
         />
-        <button type="submit">Login</button>
+        <FormButton type={"submit"} name={"Login"}/>
       </form>
     </>
   );

@@ -6,7 +6,7 @@ export const DELETE = async (req, { params }) => {
   try {
     await connectMongoDB();
     const plant = await Plant.findByIdAndDelete(params.id);
-    return NextResponse.redirect("/", { status: 303 });
+    return NextResponse.json("plant deleted", { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json("error", { status: 500 });

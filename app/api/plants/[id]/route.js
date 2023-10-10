@@ -5,7 +5,6 @@ import { connectMongoDB } from "@/lib/mongodb";
 export const GET = async (req, {params}) => {
   try {
     await connectMongoDB();
-    console.log(params.id);
     const plant = await Plant.findById(params.id);
     return NextResponse.json(plant, { status: 200 });
   } catch (error) {

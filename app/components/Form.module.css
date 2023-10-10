@@ -32,7 +32,7 @@
   text-align: center;
 }
 
-.form button {
+.formButton {
   width: 50%;
   margin: 0 auto;
   padding: 0.5rem;
@@ -42,4 +42,6 @@
   color: var(--secondaryGreen);
   font-weight: bold;
   cursor: pointer;
+  text-transform: uppercase;
+  width: 125px;
 }

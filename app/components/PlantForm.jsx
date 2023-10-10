@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
 import { validateName } from "@/utils/validation";
+import FormButton from "./FormButton";
+import FormField from "./FormField";
 
 const PlantForm = () => {
   const [formData, setFormData] = useState({
@@ -63,55 +65,43 @@ const PlantForm = () => {
 
   return (
     <form action="" className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.labelDiv}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          required
-        />
-      </div>
-      <div className={styles.labelDiv}>
-        <label htmlFor="plantImage">Image</label>
-        <input
-          type="text"
-          id="plantImage"
-          value={formData.plantImage}
-          onChange={(e) =>
-            setFormData({ ...formData, plantImage: e.target.value })
-          }
-          required
-        />
-      </div>
-      <div className={styles.labelDiv}>
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          id="description"
-          value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
-          required
-        />
-      </div>
-      <div className={styles.labelDiv}>
-        <label htmlFor="type">Type</label>
-        <input
-          type="text"
-          id="type"
-          value={formData.type}
-          onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-          required
-        />
-      </div>
+      <FormField
+        label="Name"
+        type="text"
+        id="name"
+        value={formData.name}
+        onChange={(value) => setFormData({ ...formData, name: value })}
+        required
+      />
+      <FormField
+        label="Image"
+        type="text"
+        id="plantImage"
+        value={formData.plantImage}
+        onChange={(value) => setFormData({ ...formData, plantImage: value })}
+        required
+      />
+      <FormField
+        label="Description"
+        type="text"
+        id="description"
+        value={formData.description}
+        onChange={(value) => setFormData({ ...formData, description: value })}
+        required
+      />
+      <FormField
+        label="Type"
+        type="text"
+        id="type"
+        value={formData.type}
+        onChange={(value) => setFormData({ ...formData, type: value })}
+        required
+      />
       <DisplayErrorOrMessage
         error={formData?.error}
         message={formData?.message}
       />
-      <button type="submit">Add Plant</button>
+      <FormButton type={"submit"} name={"Add plant"}/>
     </form>
   );
 };

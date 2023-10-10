@@ -9,6 +9,8 @@ import {
   validateConfirmPassword,
 } from "@/utils/validation";
 import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
+import FormButton from "./FormButton";
+import FormField from "./FormField";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -84,53 +86,41 @@ const RegisterForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.labelDiv}>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </div>
-        <div className={styles.labelDiv}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-        </div>
-        <div className={styles.labelDiv}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-          />
-        </div>
-        <div className={styles.labelDiv}>
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input
-            type="password"
-            id="confirm-password"
-            value={formData.confirmPassword}
-            onChange={(e) =>
-              setFormData({ ...formData, confirmPassword: e.target.value })
-            }
-          />
-        </div>
+        <FormField
+          label="Name"
+          type="text"
+          id="name"
+          value={formData.name}
+          onChange={(value) => setFormData({ ...formData, name: value })}
+        />
+        <FormField
+          label="Email"
+          type="email"
+          id="email"
+          value={formData.email}
+          onChange={(value) => setFormData({ ...formData, email: value })}
+        />
+        <FormField
+          label="Password"
+          type="password"
+          id="password"
+          value={formData.password}
+          onChange={(value) => setFormData({ ...formData, password: value })}
+        />
+        <FormField
+          label="Confirm Password"
+          type="password"
+          id="confirm-password"
+          value={formData.confirmPassword}
+          onChange={(value) =>
+            setFormData({ ...formData, confirmPassword: value })
+          }
+        />
         <DisplayErrorOrMessage
           error={formData?.error}
           message={formData?.message}
         />
-        <button type="submit">Register</button>
+        <FormButton type={"submit"} name={"Register"} />
       </form>
     </>
   );
