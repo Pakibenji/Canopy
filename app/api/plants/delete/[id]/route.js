@@ -1,14 +1,14 @@
 import { connectMongoDB } from "@/lib/mongodb";
-import Plant from "@models/plant";
+import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
 
-export default async function DELETE({ params }) {
-    const id = params.id;
+export const DELETE = async (req, { params }) => {
   try {
     await connectMongoDB();
-    const plant = await Plant.findByIdAndDelete(id);
-    return new NextResponse.json("plant deleted");
+    const plant = await Plant.findByIdAndDelete(params.id);
+    return NextResponse.redirect("/", { status: 303 });
   } catch (error) {
-    return new NextResponse.json("plant not deleted");
+    console.log(error);
+    return NextResponse.json("error", { status: 500 });
   }
 }

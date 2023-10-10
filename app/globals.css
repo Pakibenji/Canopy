@@ -4,6 +4,7 @@
     --black: #373435;
     --white: #F9FCFB;
     --grey: #E5E5E5;
+    --letterSpacing: -0.1rem;
 }
 
 * {

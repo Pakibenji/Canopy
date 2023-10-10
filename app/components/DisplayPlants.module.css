@@ -2,16 +2,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--secondaryGreen);
+    width: 75%;
+    margin: 0 auto;
 }
 
 .plantName{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: var(--white);
+    text-transform: Uppercase;
+    padding: 1rem 0;
+    letter-spacing: var(--letterSpacing);
 }
 
 .plantImage{
     width: 60%;
 }
 
-.plantType{}
+.plantDescription {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: var(--white);
+    padding: 1rem 0;
+}
+
+.plantType{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: var(--white);
+    padding: 1rem 0;
+}
 
 
 

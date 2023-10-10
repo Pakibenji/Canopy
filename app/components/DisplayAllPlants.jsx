@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./DisplayPlants.module.css";
 import { subTitle } from "../fonts";
+import Link from "next/link";
 
 const DisplayAllPlants = ({ plant, session }) => {
   const { name, type, plantImage, proprietary } = plant;
@@ -10,6 +11,7 @@ const DisplayAllPlants = ({ plant, session }) => {
       <img className={styles.plantImage} src={plantImage} alt="plantImage" />
       <p className={styles.plantType}>{type}</p>
       <p className={styles.plantProprietary}>{proprietary}</p>
+      <Link href={`/plants/${plant._id}`}>Details</Link>
     </div>
   );
 };

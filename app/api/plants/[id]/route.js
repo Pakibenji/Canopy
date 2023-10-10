@@ -1,15 +1,15 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 import Plant from "@/models/plant";
 import { connectMongoDB } from "@/lib/mongodb";
 
-export async function GET(request, context) 
- {
-    const { id } = context.params;
-    const { db } = await connectMongoDB();
-    const plant = Plant.find((plant) => plant._id === id);
-    return NextResponse.json({
-        plant,
-        msg: `retrieved param from end point ${id}`,
-    });
-
-} 
+export const GET = async (req, {params}) => {
+  try {
+    await connectMongoDB();
+    console.log(params.id);
+    const plant = await Plant.findById(params.id);
+    return NextResponse.json(plant, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json("error", { status: 500 });
+  }
+};

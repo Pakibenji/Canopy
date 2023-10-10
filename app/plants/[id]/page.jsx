@@ -1,14 +1,13 @@
-async function fetchPlant(id) {
-  const URL = `http://localhost:3000/api/plants/`;
-  const res = await fetch(`${URL}/${id}`);
-  const plant = res.json();
-  return plant;
-}
+import React from "react";
+import DisplayPlant from "@/app/components/DisplayPlant";
 
-export default async function Page({ params }) {
+const page = async ({ params }) => {
   const { id } = params;
-  const plant = await fetchPlant(id);
-  return <main className="main">
-    {JSON.stringify(plant)}
-  </main>;
-}
+  const data = await fetch(`${process.env.API_URL}/api/plants/${id}`);
+  const plant = await data.json();
+  return <>
+    <DisplayPlant plant={plant} />
+  </>;
+};
+
+export default page;
