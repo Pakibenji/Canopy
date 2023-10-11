@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./Form.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
+import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { validateName } from "@/utils/validation";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
@@ -71,7 +71,7 @@ const PlantForm = () => {
         id="name"
         value={formData.name}
         onChange={(value) => setFormData({ ...formData, name: value })}
-        required
+        required={true}
       />
       <FormField
         label="Image"
@@ -79,7 +79,7 @@ const PlantForm = () => {
         id="plantImage"
         value={formData.plantImage}
         onChange={(value) => setFormData({ ...formData, plantImage: value })}
-        required
+        required={true}
       />
       <FormField
         label="Description"
@@ -87,7 +87,7 @@ const PlantForm = () => {
         id="description"
         value={formData.description}
         onChange={(value) => setFormData({ ...formData, description: value })}
-        required
+        required={true}
       />
       <FormField
         label="Type"
@@ -95,7 +95,7 @@ const PlantForm = () => {
         id="type"
         value={formData.type}
         onChange={(value) => setFormData({ ...formData, type: value })}
-        required
+        required={true}
       />
       <DisplayErrorOrMessage
         error={formData?.error}

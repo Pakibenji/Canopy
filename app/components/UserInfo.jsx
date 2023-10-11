@@ -9,7 +9,7 @@ const UserInfo = () => {
   const router = useRouter();
 
   const handleEditUser = async () => {
-    router.push(`/dashboard/edit`);
+    router.push(`/dashboard/edit/${session?.user?._id}`);
   }
   const handleChangePassword = async () => {
     router.push(`/dashboard/changepassword`);

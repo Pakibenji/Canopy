@@ -1,5 +1,5 @@
 import React from "react";
-import PlantForm from "../../components/PlantForm";
+import PlantForm from "../../components/Form/PlantForm";
 import Header from "../../components/Header";
 import styles from "../../page.module.css";
 import { subTitle } from "../../fonts";

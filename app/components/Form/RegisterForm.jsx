@@ -8,7 +8,7 @@ import {
   validatePassword,
   validateConfirmPassword,
 } from "@/utils/validation";
-import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
+import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
 
@@ -92,6 +92,7 @@ const RegisterForm = () => {
           id="name"
           value={formData.name}
           onChange={(value) => setFormData({ ...formData, name: value })}
+          required={true}
         />
         <FormField
           label="Email"
@@ -99,6 +100,7 @@ const RegisterForm = () => {
           id="email"
           value={formData.email}
           onChange={(value) => setFormData({ ...formData, email: value })}
+          required={true}
         />
         <FormField
           label="Password"
@@ -106,6 +108,7 @@ const RegisterForm = () => {
           id="password"
           value={formData.password}
           onChange={(value) => setFormData({ ...formData, password: value })}
+          required={true}
         />
         <FormField
           label="Confirm Password"
@@ -115,6 +118,7 @@ const RegisterForm = () => {
           onChange={(value) =>
             setFormData({ ...formData, confirmPassword: value })
           }
+          required={true}
         />
         <DisplayErrorOrMessage
           error={formData?.error}

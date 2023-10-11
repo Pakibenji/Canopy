@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import IsLoading from "./IsLoading";
-import DisplayAllPlants from "./DisplayAllPlants";
+import DisplayAllPlants from "./Display/DisplayAllPlants";
 import { useSession } from "next-auth/react";
 
 const AllPlants = () => {

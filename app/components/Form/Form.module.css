@@ -21,6 +21,7 @@
   margin-bottom: 0.5rem;
   font-weight: bold;
   color: var(--black);
+  text-transform: uppercase;
 }
 
 .labelDiv input {
@@ -43,5 +44,5 @@
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
-  width: 125px;
+  width: 185px;
 }

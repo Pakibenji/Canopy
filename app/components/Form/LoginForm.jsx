@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import styles from "./Form.module.css";
-import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
+import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { validateEmail, validatePassword } from "@/utils/validation";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
@@ -61,6 +61,7 @@ const LoginForm = () => {
           id="email"
           value={formData.email}
           onChange={(value) => setFormData({ ...formData, email: value })}
+          required={true}
         />
         <FormField
           label="Password"
@@ -68,6 +69,7 @@ const LoginForm = () => {
           id="password"
           value={formData.password}
           onChange={(value) => setFormData({ ...formData, password: value })}
+          required={true}
         />
         <DisplayErrorOrMessage
           error={formData?.error}

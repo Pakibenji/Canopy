@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import styles from "./DisplayPlants.module.css";
-import { subTitle } from "../fonts";
+import { subTitle } from "../../fonts";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Button from "./Button";
+import Button from "../Button";
 
 const DisplayPlant = ({ plant }) => {
   const { data: session } = useSession();

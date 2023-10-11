@@ -1,5 +1,5 @@
 import React from "react";
-import DisplayPlant from "@/app/components/DisplayPlant";
+import DisplayPlant from "@/app/components/Display/DisplayPlant";
 import Header from "@/app/components/Header";
 import styles from '../../page.module.css'
 import { subTitle } from "@/app/fonts";

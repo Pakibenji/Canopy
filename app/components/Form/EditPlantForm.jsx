@@ -3,7 +3,7 @@ import styles from "./Form.module.css";
 import React, { useState } from "react";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
-import DisplayErrorOrMessage from "./DisplayErrorOrMessage";
+import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { useRouter } from "next/navigation";
 
 const EditPlantForm = ({ plant }) => {
@@ -63,7 +63,7 @@ const EditPlantForm = ({ plant }) => {
         onChange={(value) =>
           setUpdateFormData({ ...updateFormData, name: value })
         }
-        required
+        required={true}
       />
       <FormField
         label="Image"
@@ -74,7 +74,7 @@ const EditPlantForm = ({ plant }) => {
         onChange={(value) =>
           setUpdateFormData({ ...updateFormData, plantImage: value })
         }
-        required
+        required={true}
       />
       <FormField
         label="Description"
@@ -85,7 +85,7 @@ const EditPlantForm = ({ plant }) => {
         onChange={(value) =>
           setUpdateFormData({ ...updateFormData, description: value })
         }
-        required
+        required={true}
       />
       <FormField
         label="Type"
@@ -96,7 +96,7 @@ const EditPlantForm = ({ plant }) => {
         onChange={(value) =>
           setUpdateFormData({ ...updateFormData, type: value })
         }
-        required
+        required={true}
       />
       <DisplayErrorOrMessage
         error={updateFormData?.error}

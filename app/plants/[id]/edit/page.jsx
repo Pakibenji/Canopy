@@ -2,8 +2,7 @@ import Header from '@/app/components/Header'
 import React from 'react'
 import styles from '@/app/page.module.css'
 import { subTitle } from '@/app/fonts'
-import PlantForm from '@/app/components/PlantForm'
-import EditPlantForm from '@/app/components/EditPlantForm'
+import EditPlantForm from '@/app/components/Form/EditPlantForm'
 
 const EditPlantPage = async ({params}) => {
   const { id } = params;

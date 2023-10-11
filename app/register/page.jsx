@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterForm from "../components/RegisterForm";
+import RegisterForm from "../components/Form/RegisterForm";
 import Header from "../components/Header";
 import styles from "../page.module.css";
 import { subTitle } from "../fonts";

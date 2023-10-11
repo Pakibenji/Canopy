@@ -38,3 +38,10 @@ export function validateDescription(description) {
   }
   return null;
 }
+
+export function validateImage(image) {
+  if (!image) {
+    return "Please upload an image";
+  }
+  return null;
+}

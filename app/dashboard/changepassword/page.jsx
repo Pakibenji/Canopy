@@ -2,7 +2,7 @@ import Header from "@/app/components/Header";
 import React from "react";
 import styles from "@/app/page.module.css";
 import { subTitle } from "@/app/fonts";
-import ChangePasswordForm from "@/app/components/ChangePasswordForm";
+import ChangePasswordForm from "@/app/components/Form/ChangePasswordForm";
 
 const ChangePasswordPage = async () => {
 

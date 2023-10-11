@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./Form.module.css"
 
-const FormField = ({ label, type, id, value, onChange, placeholder }) => {
+const FormField = ({ label, type, id, value, onChange, placeholder, required }) => {
   return (
     <div className={styles.labelDiv}>
       <label htmlFor={id}>{label}</label>
@@ -12,7 +12,8 @@ const FormField = ({ label, type, id, value, onChange, placeholder }) => {
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        required
+        {...(required && { required: true })
+        }
       />
     </div>
   );

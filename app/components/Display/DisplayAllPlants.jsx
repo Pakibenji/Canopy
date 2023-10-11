@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./DisplayPlants.module.css";
-import { subTitle } from "../fonts";
+import { subTitle } from "../../fonts";
 import Link from "next/link";
 
 const DisplayAllPlants = ({ plant, session }) => {
