@@ -27,6 +27,11 @@ const PlantSchema = new Schema(
       type: String,
       required: true,
     },
+    toBarter: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
   { timestamps: true }
 );

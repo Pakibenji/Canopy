@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 export const PATCH = async (req, { params }) => {
   const { id } = params;
   const body = await req.json();
+  console.log(body)
   try {
     await connectMongoDB();
     const updatedUser = await User.findOneAndUpdate(

@@ -1,26 +1,21 @@
 "use client";
 import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
 import Button from "./Button";
 import { useRouter } from "next/navigation";
-
-const UserInfo = () => {
-  const { data: session } = useSession();
+import DisplayUserInfo from "./Display/DisplayUserInfo";
+const UserDetail = ({ user }) => {
   const router = useRouter();
 
   const handleEditUser = async () => {
-    router.push(`/dashboard/edit/${session?.user?._id}`);
-  }
+    router.push(`/dashboard/edit/${user._id}`);
+  };
   const handleChangePassword = async () => {
-    router.push(`/dashboard/changepassword`);
-  }
+    router.push(`/dashboard/changepassword/${user._id}`);
+  };
 
   return (
     <>
-      <div>
-        <h2>{session?.user?.name}</h2>
-        <p>{session?.user?.email}</p>
-      </div>
+      <DisplayUserInfo name={user.name} email={user.email} userImage={user?.userImage} description={user?.description}/>
       <Button func={handleChangePassword} name="Change Password" />
       <Button func={handleEditUser} name="Edit User" />
       <Button func={signOut} name="Log Out" />
@@ -28,4 +23,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default UserDetail;

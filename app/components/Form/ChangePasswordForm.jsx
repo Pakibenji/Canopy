@@ -1,14 +1,15 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 import FormField from "./FormField";
 import styles from "./Form.module.css";
 import FormButton from "./FormButton";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { validatePassword, validateConfirmPassword } from "@/utils/validation";
+import { useRouter } from "next/navigation";
 
-const ChangePasswordForm = () => {
-  const { data: session } = useSession();
+const ChangePasswordForm = ({ user }) => {
+  const { _id } = user;
+  const router = useRouter();
   const [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -38,19 +39,22 @@ const ChangePasswordForm = () => {
       setFormData({ ...formData, error: confirmPasswordError });
       return;
     }
-
-    const result = await updateUser(session.user.id, {
-      password: newPassword,
-      oldPassword,
+    const data = await fetch(`/api/user/password/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
     });
-    if (result.error) {
-      setFormData({ ...formData, error: result.error, message: "" });
+    const response = await data.json();
+    if (response.error) {
+      setFormData({ ...formData, error: response.error });
+      return;
     } else {
-      setFormData({
-        ...formData,
-        message: "Password successfully changed",
-        error: "",
-      });
+      setFormData({ ...formData, message: response.message });
+      setTimeout(() => {
+        router.push(`/dashboard`);
+      }, 2000);
     }
   };
 
@@ -58,7 +62,7 @@ const ChangePasswordForm = () => {
     <form onSubmit={handleChangePassword} className={styles.form}>
       <FormField
         label="Old Password"
-        type="oldPassword"
+        type="password"
         id="oldPassword"
         value={formData.password}
         onChange={(value) => setFormData({ ...formData, oldPassword: value })}
@@ -66,7 +70,7 @@ const ChangePasswordForm = () => {
       />
       <FormField
         label="New Password"
-        type="newPassword"
+        type="password"
         id="newPassword"
         value={formData.password}
         onChange={(value) => setFormData({ ...formData, newPassword: value })}
@@ -74,10 +78,12 @@ const ChangePasswordForm = () => {
       />
       <FormField
         label="confirm Password"
-        type="confirmPassword"
+        type="password"
         id="confirmPassword"
         value={formData.password}
-        onChange={(value) => setFormData({ ...formData, confirmPassword: value })}
+        onChange={(value) =>
+          setFormData({ ...formData, confirmPassword: value })
+        }
         required={true}
       />
       <DisplayErrorOrMessage

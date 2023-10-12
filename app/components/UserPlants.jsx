@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import DisplayUserPlants from "./Display/DisplayUserPlants";
 import IsLoading from "./IsLoading";
-import styles from "./UserPlants.module.css";
-import { subTitle } from "../fonts";
 import Button from "./Button";
 
 const UserPlants = () => {

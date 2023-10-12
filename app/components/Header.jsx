@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 
 const Header = () => {
   const { data: session } = useSession();
+  const userId = session?.user?._id;
 
   function buttonDisplay() {
     if (session) {
@@ -19,7 +20,7 @@ const Header = () => {
   function isConnected() {
     return (
       <nav style={subTitle.style} className={styles.nav}>
-        <Link href="/dashboard"> Dashboard </Link>
+        <Link href={`/dashboard/${userId}`}> Dashboard </Link>
       </nav>
     );
   }

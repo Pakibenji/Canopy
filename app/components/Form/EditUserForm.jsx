@@ -20,12 +20,12 @@ const EditUserForm = ({ user }) => {
   });
   const router = useRouter();
 
-  const handleChangeName = async (e) => {
+  const handleEditUser = async (e) => {
     e.preventDefault();
     const userData = {
       name: formData.name || user.name,
       userImage: formData.userImage || user.userImage,
-      userDescription: formData.userDescription || user.userDescription,
+      userDescription: formData.description || user.description,
     };
     console.log(userData);
     try {
@@ -52,11 +52,11 @@ const EditUserForm = ({ user }) => {
       }
     } catch (error) {
       console.log(error);
-    }s
+    }
   };
 
   return (
-    <form onSubmit={handleChangeName} className={styles.form}>
+    <form onSubmit={handleEditUser} className={styles.form}>
       <FormField
         label="Name"
         type="text"
