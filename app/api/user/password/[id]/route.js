@@ -2,6 +2,7 @@ import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import { getNextServerSession } from "@/app/api/auth/[...nextauth]/route";
 
 export const PATCH = async (req, { params }) => {
   const { id } = params;

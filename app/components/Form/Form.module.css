@@ -33,6 +33,22 @@
   text-align: center;
 }
 
+.selector {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--white);
+  border-radius: 0.5rem;
+  background: var(--white);
+  text-align: center;
+}
+
+.option {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--black);
+}
+
 .formButton {
   width: 50%;
   margin: 0 auto;

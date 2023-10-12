@@ -11,4 +11,4 @@ export const DELETE = async (req, { params }) => {
     console.log(error);
     return NextResponse.json("error", { status: 500 });
   }
-}
+};

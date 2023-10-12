@@ -1,4 +1,4 @@
- import { Source_Sans_3, Montserrat, Marcellus} from "next/font/google"
+ import { Source_Sans_3, Montserrat, Fira_Sans} from "next/font/google"
 
 export const bigTitle = Source_Sans_3({
   weight: "900",
@@ -12,7 +12,7 @@ export const subTitle = Montserrat({
   display: "swap",
 })
 
-export const body = Marcellus({
+export const body = Fira_Sans({
   weight: "400",
   subsets: ["latin"],
   display: "swap",

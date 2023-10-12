@@ -1,6 +1,7 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
+import { getNextServerSession } from "../../auth/[...nextauth]/route";
 
 export const GET = async (req, { params }) => {
   try {

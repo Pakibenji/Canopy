@@ -4,17 +4,16 @@ import FormField from "./FormField";
 import styles from "./Form.module.css";
 import FormButton from "./FormButton";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
-import { validateName } from "@/utils/validation";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const EditUserForm = ({ user }) => {
-  const { name, userImage, userDescription } = user;
+  const { name, userImage, description, _id } = user;
   const { data: session, update } = useSession();
   const [formData, setFormData] = useState({
     name: "",
     userImage: "",
-    userDescription: "",
+    description: "",
     error: "",
     message: "",
   });
@@ -25,11 +24,10 @@ const EditUserForm = ({ user }) => {
     const userData = {
       name: formData.name || user.name,
       userImage: formData.userImage || user.userImage,
-      userDescription: formData.description || user.description,
+      description: formData.description || user.description,
     };
-    console.log(userData);
     try {
-      const response = await fetch(`/api/user/edit/${user._id}`, {
+      const response = await fetch(`/api/user/edit/${_id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +45,7 @@ const EditUserForm = ({ user }) => {
         });
         await update({ ...session, user: userData});
         setTimeout(() => {
-          router.replace("/dashboard");
+          router.replace(`/dashboard${_id}`);
         }, 2000);
       }
     } catch (error) {
@@ -75,10 +73,10 @@ const EditUserForm = ({ user }) => {
       <FormField
         label="Description"
         type="text"
-        placeholder={userDescription}
-        value={formData.userDescription}
+        placeholder={description}
+        value={formData.description}
         onChange={(value) =>
-          setFormData({ ...formData, userDescription: value })
+          setFormData({ ...formData, description: value })
         }
       />
       <DisplayErrorOrMessage

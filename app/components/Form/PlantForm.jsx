@@ -31,6 +31,7 @@ const PlantForm = () => {
       setFormData({ ...formData, error: nameError });
       return;
     }
+    console.log("form data", formData);
     try {
       const res = await fetch("/api/plants/new", {
         method: "POST",
@@ -91,17 +92,17 @@ const PlantForm = () => {
       />
       <FormField
         label="Type"
-        type="text"
-        id="type"
+        type="select"
+        id="plantType"
+        name="plantType"
         value={formData.type}
         onChange={(value) => setFormData({ ...formData, type: value })}
-        required={true}
       />
       <DisplayErrorOrMessage
         error={formData?.error}
         message={formData?.message}
       />
-      <FormButton type={"submit"} name={"Add plant"}/>
+      <FormButton type={"submit"} name={"Add plant"} />
     </form>
   );
 };
