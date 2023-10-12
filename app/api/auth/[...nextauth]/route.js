@@ -5,7 +5,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth/next";
 
-
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -42,9 +41,14 @@ export const authOptions = {
       }
       return session;
     },
-    jwt: async ({ user, token }) => {
+    jwt: async ({ user, token, session, trigger }) => {
       if (user) {
         token._id = user._id;
+      }
+      if (session && session?.user?.name) {
+        if (trigger === "update") {
+          token.name = session.user.name;
+        }
       }
       return token;
     },

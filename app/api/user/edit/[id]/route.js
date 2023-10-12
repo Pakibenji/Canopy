@@ -1,6 +1,7 @@
 import User from "@/models/user";
 import { connectMongoDB } from "@/lib/mongodb";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
 export const PATCH = async (req, { params }) => {
   const { id } = params;
@@ -10,7 +11,7 @@ export const PATCH = async (req, { params }) => {
     const updatedUser = await User.findOneAndUpdate(
       { _id: id },
       { ...body },
-      { new: true }
+      { new: true },
     );
     return NextResponse.json("User successfully edited", { status: 200 });
   } catch (error) {

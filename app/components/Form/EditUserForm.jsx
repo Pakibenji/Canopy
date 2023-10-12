@@ -6,9 +6,11 @@ import FormButton from "./FormButton";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { validateName } from "@/utils/validation";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const EditUserForm = ({ user }) => {
   const { name, userImage, userDescription } = user;
+  const { data: session, update } = useSession();
   const [formData, setFormData] = useState({
     name: "",
     userImage: "",
@@ -25,6 +27,7 @@ const EditUserForm = ({ user }) => {
       userImage: formData.userImage || user.userImage,
       userDescription: formData.userDescription || user.userDescription,
     };
+    console.log(userData);
     try {
       const response = await fetch(`/api/user/edit/${user._id}`, {
         method: "PATCH",
@@ -42,13 +45,14 @@ const EditUserForm = ({ user }) => {
           message: "User successfully edited!",
           error: "",
         });
+        await update({ ...session, user: userData});
         setTimeout(() => {
-          router.replace(`/dashboard`);
+          router.replace("/dashboard");
         }, 2000);
       }
     } catch (error) {
       console.log(error);
-    }
+    }s
   };
 
   return (
@@ -56,6 +60,7 @@ const EditUserForm = ({ user }) => {
       <FormField
         label="Name"
         type="text"
+        placeholder={name}
         value={formData.name}
         onChange={(value) => setFormData({ ...formData, name: value })}
         required={true}
@@ -63,12 +68,14 @@ const EditUserForm = ({ user }) => {
       <FormField
         label="Image"
         type="text"
+        placeholder={userImage}
         value={formData.userImage}
         onChange={(value) => setFormData({ ...formData, userImage: value })}
       />
       <FormField
         label="Description"
         type="text"
+        placeholder={userDescription}
         value={formData.userDescription}
         onChange={(value) =>
           setFormData({ ...formData, userDescription: value })
