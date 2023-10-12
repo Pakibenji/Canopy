@@ -14,6 +14,6 @@ export const PATCH = async (req, { params }) => {
     );
     return NextResponse.json("Plant successfully edited", { status: 200 });
   } catch (error) {
-    return new NextResponse.json(error.message, { status: 500 });
+    console.log(error);
   }
 };

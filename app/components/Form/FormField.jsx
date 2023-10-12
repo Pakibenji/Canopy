@@ -19,9 +19,8 @@ const FormField = ({
         <select
           className={styles.selector}
           value={value}
-          onChange={(e) => onSelect(e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
         >
-          {console.log(value)}
           {plantTypes.map((type, index) => (
             <option key={index} value={type}>
               {type}
@@ -30,7 +29,7 @@ const FormField = ({
         </select>
       );
     }
-    if (type === "text" || type === "password") {
+    if (type === "text" || type === "password" || type === "email") {
       return (
         <input
           type={type}

@@ -1,12 +1,18 @@
-"use client";
 import React from "react";
 
 const DisplayErrorOrMessage = ({ error, message }) => {
+  function isError() {
+    error ? <div className="error">{error}</div> : null;
+  }
+
+  function isMessage() {
+    message ? <div className="message">{message}</div> : null;
+  }
 
   return (
     <>
-      {error && <div className="error">{error}</div>}
-      {message && <div className="message">{message}</div>}
+      {isError()}
+      {isMessage()}
     </>
   );
 };

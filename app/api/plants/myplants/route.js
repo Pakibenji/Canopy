@@ -3,7 +3,7 @@ import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
 import { getNextServerSession } from "../../auth/[...nextauth]/route";
 
-export async function GET() {
+export const GET = async () => {
   const session = await getNextServerSession();
   const userId = session?.user?._id;
   try {
@@ -13,4 +13,4 @@ export async function GET() {
   } catch (error) {
     console.log(error);
   }
-}
+};
