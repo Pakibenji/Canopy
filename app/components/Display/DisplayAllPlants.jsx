@@ -7,7 +7,7 @@ const DisplayAllPlants = ({ plant, session }) => {
   const { name, type, plantImage, proprietary, userId } = plant;
 
   function isUser() {
-    if(session.user._id === userId) {
+    if(session?.user?._id === userId) {
       return "My Plant"
     } else {
       return proprietary

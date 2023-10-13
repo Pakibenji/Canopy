@@ -20,13 +20,9 @@ const LoginForm = () => {
     e.preventDefault();
     const { email, password } = formData;
     const emailError = validateEmail(email);
-    if (emailError) {
-      setFormData({ ...formData, error: emailError });
-      return;
-    }
     const passwordError = validatePassword(password);
-    if (passwordError) {
-      setFormData({ ...formData, error: passwordError });
+    if (emailError || passwordError) {
+      setFormData({ ...formData, error: emailError || passwordError });
       return;
     }
     try {
@@ -55,7 +51,7 @@ const LoginForm = () => {
   return (
     <>
       <form action="" onSubmit={handleSubmit} className={styles.form}>
-      <FormField
+        <FormField
           label="Email"
           type="email"
           id="email"
@@ -75,7 +71,7 @@ const LoginForm = () => {
           error={formData?.error}
           message={formData?.message}
         />
-        <FormButton type={"submit"} name={"Login"}/>
+        <FormButton type={"submit"} name={"Login"} />
       </form>
     </>
   );

@@ -4,7 +4,7 @@ import { subTitle } from '../fonts'
 
 const Button = ({func, name}) => {
   return (
-    <><button onClick={() => func()} className={styles.button} style={subTitle.style}>{name}</button></>
+    <button onClick={() => func()} className={styles.button} style={subTitle.style}>{name}</button>
   )
 }
 

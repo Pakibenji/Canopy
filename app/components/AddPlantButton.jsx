@@ -2,12 +2,14 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { RiPlantFill } from "react-icons/ri";
-import styles from "./AddPlant.module.css";
+import styles from "./AddPlantButton.module.css";
 import { useRouter } from "next/navigation";
 
-const AddPlant = () => {
-  const { data: session } = useSession();
+const AddPlantButton = () => {
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
   const router = useRouter();
+
   const handleAddPlant = () => {
     router.push("/plants/add");
   };
@@ -15,12 +17,12 @@ const AddPlant = () => {
   return (
     <>
       {session && (
-        <button onClick={handleAddPlant} className={styles.addPlant}>
-          <RiPlantFill  className={styles.icon}/>
+        <button onClick={handleAddPlant} className={styles.addPlant} disabled={isLoading}>
+          <RiPlantFill className={styles.icon} />
         </button>
       )}
     </>
   );
 };
 
-export default AddPlant;
+export default AddPlantButton;

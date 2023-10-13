@@ -27,26 +27,17 @@ const RegisterForm = () => {
     e.preventDefault();
     const { name, email, password } = formData;
     const nameError = validateName(name);
-    if (nameError) {
-      setFormData({ ...formData, error: nameError });
-      return;
-    }
     const emailError = validateEmail(email);
-    if (emailError) {
-      setFormData({ ...formData, error: emailError });
-      return;
-    }
     const passwordError = validatePassword(password);
-    if (passwordError) {
-      setFormData({ ...formData, error: passwordError });
-      return;
-    }
     const confirmPasswordError = validateConfirmPassword(
       password,
       formData.confirmPassword
     );
-    if (confirmPasswordError) {
-      setFormData({ ...formData, error: confirmPasswordError });
+    if (nameError || emailError || passwordError || confirmPasswordError) {
+      setFormData({
+        ...formData,
+        error: nameError || emailError || passwordError || confirmPasswordError,
+      });
       return;
     }
     try {

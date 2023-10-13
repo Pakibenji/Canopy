@@ -1,13 +1,13 @@
 import React from "react";
 
 const DisplayErrorOrMessage = ({ error, message }) => {
-  function isError() {
-    error ? <div className="error">{error}</div> : null;
-  }
+  const isError = () => {
+    return error ? <div className="error">{error}</div> : null;
+  };
 
-  function isMessage() {
-    message ? <div className="message">{message}</div> : null;
-  }
+  const isMessage = () => {
+    return message ? <div className="message">{message}</div> : null;
+  };
 
   return (
     <>

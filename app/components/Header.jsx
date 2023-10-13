@@ -1,36 +1,36 @@
-"use client";
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/assets/logo.svg";
 import styles from "./Header.module.css";
 import { subTitle } from "../fonts";
 import { useSession } from "next-auth/react";
+import { useMemo } from "react";
+import IsLoading from "./IsLoading";
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session, status, error } = useSession({ fallback: <IsLoading /> });
   const userId = session?.user?._id;
 
-  function buttonDisplay() {
-    if (session) {
-      return isConnected();
-    }
-    return isNotConnected();
-  }
-
-  function isConnected() {
+  const isConnected = useMemo(() => {
     return (
       <nav style={subTitle.style} className={styles.nav}>
         <Link href={`/dashboard/${userId}`}> Dashboard </Link>
       </nav>
     );
-  }
-  function isNotConnected() {
+  }, [userId]);
+
+  const isNotConnected = useMemo(() => {
     return (
       <nav style={subTitle.style} className={styles.nav}>
         <Link href="/register"> Register </Link>
         <Link href="/login"> Login </Link>
       </nav>
     );
+  }, []);
+
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
   return (
@@ -38,8 +38,9 @@ const Header = () => {
       <Link href="/">
         <Image src={logo} alt="Jardin Calme" width={150} height={80} priority />
       </Link>
-      {buttonDisplay()}
+      {session ? isConnected : isNotConnected}
     </header>
   );
 };
+
 export default Header;

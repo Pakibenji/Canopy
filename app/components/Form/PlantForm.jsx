@@ -9,6 +9,10 @@ import FormButton from "./FormButton";
 import FormField from "./FormField";
 
 const PlantForm = () => {
+  const { data: session } = useSession();
+  const userId = session?.user?._id;
+  const proprietary = session?.user?.name;
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     plantImage: "",
@@ -18,11 +22,6 @@ const PlantForm = () => {
     error: "",
   });
 
-  const { data: session } = useSession();
-  const userId = session?.user?._id;
-  const proprietary = session?.user?.name;
-  const router = useRouter();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, plantImage, type, description } = formData;
@@ -31,7 +30,6 @@ const PlantForm = () => {
       setFormData({ ...formData, error: nameError });
       return;
     }
-    console.log("form data", formData);
     try {
       const res = await fetch("/api/plants/new", {
         method: "POST",

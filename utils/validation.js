@@ -1,47 +1,27 @@
-export function validateName(name) {
-  if (name.length < 1 || name.length > 30) {
-    return "Name must be between 1 and 30 characters";
-  }
-  return null;
-}
+export const validateName = (name) =>
+  name.length < 1 || name.length > 30
+    ? "Name must be between 1 and 30 characters"
+    : null;
 
-export function validateEmail(email) {
-  if (!email.includes("@")) {
-    return "Invalid email";
-  }
-  return null;
-}
+export const validateEmail = (email) =>
+  email.includes("@") ? null : "Invalid email";
 
-export function validatePassword(password) {
-  if (password.length < 7) {
-    return "Password must be at least 7 characters";
-  }
-  if (password === password.toUpperCase()) {
-    return "Password must contain a lowercase character";
-  }
-  if (password === password.toLowerCase()) {
-    return "Password must contain an uppercase character";
-  }
-  return null;
-}
+export const validatePassword = (password) =>
+  password.length < 7
+    ? "Password must be at least 7 characters"
+    : password === password.toUpperCase()
+    ? "Password must contain a lowercase character"
+    : password === password.toLowerCase()
+    ? "Password must contain an uppercase character"
+    : null;
 
-export function validateConfirmPassword(password, confirmPassword) {
-  if (password !== confirmPassword) {
-    return "Passwords do not match";
-  }
-  return null;
-}
+export const validateConfirmPassword = (password, confirmPassword) =>
+  password === confirmPassword ? null : "Passwords do not match";
 
-export function validateDescription(description) {
-  if (description.length < 1 || description.length > 100) {
-    return "Description must be between 1 and 100 characters";
-  }
-  return null;
-}
+export const validateDescription = (description) =>
+  description.length < 1 || description.length > 100
+    ? "Description must be between 1 and 100 characters"
+    : null;
 
-export function validateImage(image) {
-  if (!image) {
-    return "Please upload an image";
-  }
-  return null;
-}
+export const validateImage = (image) =>
+  image ? null : "Please upload an image";

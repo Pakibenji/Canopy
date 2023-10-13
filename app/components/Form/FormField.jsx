@@ -9,43 +9,49 @@ const FormField = ({
   id,
   value,
   onChange,
-  onSelect,
   placeholder,
   required,
 }) => {
-  function isSelect(type) {
+  function selectInput() {
+    return (
+      <select
+        className={styles.selector}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
+        {plantTypes.map((type, index) => (
+          <option key={index} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
+    );
+  }
+
+  function standartInput() {
+    return (
+      <input
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        {...(required && { required: true })}
+      />
+    );
+  }
+  function selectInputOrStandartInput(type) {
     if (type === "select") {
-      return (
-        <select
-          className={styles.selector}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          {plantTypes.map((type, index) => (
-            <option key={index} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      );
+      return selectInput();
     }
     if (type === "text" || type === "password" || type === "email") {
-      return (
-        <input
-          type={type}
-          id={id}
-          placeholder={placeholder}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          {...(required && { required: true })}
-        />
-      );
+      return standartInput();
     }
   }
   return (
     <div className={styles.labelDiv}>
       <label htmlFor={id}>{label}</label>
-      {isSelect(type)}
+      {selectInputOrStandartInput(type)}
     </div>
   );
 };
