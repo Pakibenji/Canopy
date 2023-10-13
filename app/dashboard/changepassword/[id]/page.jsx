@@ -15,7 +15,7 @@ const ChangePasswordPage = async ({params}) => {
   const getSession = await getNextServerSession();
   const sessionUserId = await getSession?.user?._id;
 
-  const isUser = isUserSession(sessionUserId, id, redirect, `/dashboard/${sessionUserId}`);
+  const isUser = isUserSession(sessionUserId, id, redirect, `/dashboard/changepassword/${sessionUserId}`);
 
   return <>
     <Header />
