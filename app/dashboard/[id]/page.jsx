@@ -6,11 +6,12 @@ import UserPlants from "../../components/UserPlants";
 import { getNextServerSession } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { isUserSession } from "@/utils/helpers";
-
+export const dynamic = 'force-dynamic'
 const Dashboard = async ({ params }) => {
   const { id } = params;
   const getUser = await fetch(`${process.env.API_URL}/api/user/${id}`);
   const user = await getUser.json();
+  
   
   const getSession = await getNextServerSession();
   const sessionUserId = await getSession?.user?._id;
