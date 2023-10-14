@@ -38,8 +38,7 @@ const Geolocation = () => {
   }, [onSuccess, onError]);
 
   return (
-    <div>
-      <h1>Coordinates</h1>
+    <>
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
@@ -47,7 +46,7 @@ const Geolocation = () => {
       ) : (
         <UserCity lat={coordinates.lat} lng={coordinates.lng} />
       )}
-    </div>
+    </>
   );
 };
 

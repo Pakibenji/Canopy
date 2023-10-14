@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./Form.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -7,6 +7,7 @@ import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { validateName } from "@/utils/validation";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
+import { CityContext } from "@/app/context/geoLocationContext";
 
 const PlantForm = () => {
   const { data: session } = useSession();
@@ -21,6 +22,7 @@ const PlantForm = () => {
     message: "",
     error: "",
   });
+  const { city } = useContext(CityContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +43,7 @@ const PlantForm = () => {
           plantImage,
           type,
           description,
+          city,
           userId,
           proprietary,
         }),

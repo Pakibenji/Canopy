@@ -3,7 +3,6 @@ import Header from "../../components/Header";
 import styles from "@/app/page.module.css";
 import { subTitle } from "../../fonts";
 import UserPlants from "../../components/UserPlants";
-import Geolocation from "../../components/Geolocation";
 import { getNextServerSession } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { isUserSession } from "@/utils/helpers";
@@ -26,7 +25,6 @@ const Dashboard = async ({ params }) => {
   return (
     <>
       <Header />
-      <Geolocation />
       <h2 style={subTitle.style} className={styles.pageTitle}>
         Dashboard
       </h2>
