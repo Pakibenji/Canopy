@@ -1,8 +1,8 @@
 'use client';
 import { signOut } from "next-auth/react";
-import Button from "./Button";
+import Button from "../Button";
 import { useRouter } from "next/navigation";
-import DisplayUserInfo from "./Display/DisplayUserInfo";
+import DisplayUserInfo from "../Display/DisplayUserInfo";
 
 const UserDetail = ({ user }) => {
   const router = useRouter();

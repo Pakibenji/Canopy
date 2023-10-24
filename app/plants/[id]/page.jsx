@@ -1,7 +1,6 @@
 import React from "react";
 import DisplayPlant from "@/app/components/Display/DisplayPlant";
-import Header from "@/app/components/Header";
-import styles from '../../page.module.css'
+import styles from "../../page.module.css";
 import { subTitle } from "@/app/fonts";
 
 const PlantDetailPage = async ({ params }) => {
@@ -10,11 +9,12 @@ const PlantDetailPage = async ({ params }) => {
   const plant = await data.json();
   return (
     <>
-      <Header />
-      <h2 style={subTitle.style} className={styles.pageTitle}>Plant Detail</h2>
+      <h2 style={subTitle.style} className={styles.pageTitle}>
+        Plant Detail
+      </h2>
       <DisplayPlant plant={plant} />
     </>
   );
 };
 
-export default PlantDetailPage
+export default PlantDetailPage;

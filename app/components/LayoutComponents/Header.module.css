@@ -3,7 +3,20 @@
   justify-content: space-between;
   align-items: center;
   justify-content: left;
-  background-color: var(--mainGreen);
+  background-color: var(--black);
+  height: 80px;
+}
+
+.header a {
+  color: var(--white);
+  text-decoration: none;
+  background: var(--black);
+}
+.header a img {
+  width: 178px;
+  height: 40px;
+  margin: 0.2rem 0.5rem;
+  padding: 0;
 }
 .nav {
   display: flex;
@@ -15,5 +28,5 @@
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
-  background: var(--secondaryGreen);
+  background: var(--mainYellow);
 }

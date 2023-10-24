@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
-import DisplayUserPlants from "./Display/DisplayUserPlants";
-import IsLoading from "./IsLoading";
-import Button from "./Button";
+import DisplayUserPlants from "../Display/DisplayUserPlants"
+import IsLoading from "../IsLoading";
+import Button from "../Button";
 
 const UserPlants = () => {
   const [myPlantsArray, setMyPlantsArray] = useState([]);

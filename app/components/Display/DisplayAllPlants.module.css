@@ -1,0 +1,28 @@
+.plantContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    background: var(--mainYellow);
+    width: 75%;
+    margin: 0 auto;
+    border: 3px solid var(--mainYellow);
+    text-decoration: none;
+    margin: 1rem auto;
+  }
+  .plantContainer a {
+    text-decoration: none;
+  }
+
+  .plantImage {
+    width: 100%;
+  }
+  
+  .plantProprietary {
+    color: var(--black);
+    text-align: left;
+    font-size: 1rem;
+    margin-left: 1rem;
+  }
+  

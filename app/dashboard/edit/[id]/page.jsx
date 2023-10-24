@@ -1,4 +1,3 @@
-import Header from "@/app/components/Header";
 import React from "react";
 import styles from "@/app/page.module.css";
 import { subTitle } from "@/app/fonts";
@@ -15,15 +14,19 @@ const EditUserPage = async ({ params }) => {
   const getSession = await getNextServerSession();
   const sessionUserId = await getSession?.user?._id;
 
-  const isUser = isUserSession(sessionUserId, id, redirect, `/dashboard/edit/${sessionUserId}`);
+  const isUser = isUserSession(
+    sessionUserId,
+    id,
+    redirect,
+    `/dashboard/edit/${sessionUserId}`
+  );
 
   return (
     <>
-      <Header />
       <h2 style={subTitle.style} className={styles.pageTitle}>
         Edit Account
       </h2>
-      <EditUserForm user={user}/>
+      <EditUserForm user={user} />
     </>
   );
 };

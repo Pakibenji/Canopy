@@ -3,7 +3,7 @@
   align-items: center;
   margin: 0 auto 0 auto;
   animation: rotate 3s linear infinite;
-  color: var(--mainGreen);
+  color: var(--mainYellow);
   font-size: 3rem;
 }
 

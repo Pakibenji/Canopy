@@ -1,6 +1,5 @@
 import React from 'react'
 import LoginForm from '../components/Form/LoginForm'
-import Header from '../components/Header'
 import styles from '../page.module.css'
 import { subTitle } from '../fonts'
 import Link from 'next/link'
@@ -9,7 +8,6 @@ const Login = () => {
 
   return (
     <>
-        <Header />
         <h2 style={subTitle.style} className={styles.pageTitle}>Login</h2>
         <LoginForm />
         <div className="link" style={subTitle.style}>

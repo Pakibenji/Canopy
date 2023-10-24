@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export const POST = async (req) => {
   try {
     await connectMongoDB();
-    const { name, plantImage, type, description,city, userId, proprietary } =
+    const { name, plantImage, type, description, city, userId, proprietary } =
       await req.json();
     const plant = await Plant.create({
       name,

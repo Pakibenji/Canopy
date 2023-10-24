@@ -1,8 +1,7 @@
-import UserDetail from "../../components/UserDetail";
-import Header from "../../components/Header";
+import UserDetail from "../../components/UserComponents/UserDetail";
 import styles from "@/app/page.module.css";
 import { subTitle } from "../../fonts";
-import UserPlants from "../../components/UserPlants";
+import UserPlants from "@/app/components/UserComponents/UserPlants"
 import { getNextServerSession } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { isUserSession } from "@/utils/helpers";
@@ -24,7 +23,6 @@ const Dashboard = async ({ params }) => {
 
   return (
     <>
-      <Header />
       <h2 style={subTitle.style} className={styles.pageTitle}>
         Dashboard
       </h2>

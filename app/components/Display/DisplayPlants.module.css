@@ -1,52 +1,52 @@
-.plantContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--secondaryGreen);
-    width: 75%;
-    margin: 0 auto;
+.plantContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--mainYellow);
+  width: 75%;
+  margin: 0 auto;
+  border: 3px solid var(--secondaryYellow);
 }
 
-.plantName{
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    color: var(--white);
-    text-transform: Uppercase;
-    padding: 1rem 0;
-    letter-spacing: var(--letterSpacing);
+.plantName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--mainYellow);
+  text-transform: Uppercase;
+  padding: 1rem 0;
+  letter-spacing: var(--letterSpacing);
 }
 
-.plantImage{
-    width: 60%;
+.plantImage {
+  width: 100%;
 }
 
 .plantDescription {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    color: var(--white);
-    padding: 1rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--mainYellow);
+  padding: 1rem 0;
 }
 
-.plantType{
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    color: var(--white);
-    padding: 1rem 0;
+.plantType {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--mainYellow);
+  padding: 1rem 0;
 }
 
+.plantProprietary {
+}
 
-
-.plantProprietary{}
-
-.buttonContainer{
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    margin: 0 auto;
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
 }

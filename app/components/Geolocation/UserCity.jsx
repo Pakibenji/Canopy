@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
-import { CityContext } from "../context/geoLocationContext";
+import { CityContext } from "../../context/geoLocationContext";
 const UserCity = ({ lat, lng }) => {
   const [city, setCity] = useState("");
   const { refreshCityState } = useContext(CityContext);
@@ -17,6 +17,7 @@ const UserCity = ({ lat, lng }) => {
   useEffect(() => {
     getUserCity();
   }, []);
+  console.log(city);
 
   return;
 };

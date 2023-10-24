@@ -1,10 +1,9 @@
 :root {
-    --mainGreen: #4DB283;
-    --secondaryGreen: #71C19C;
-    --black: #373435;
+    --black: #0C343D;
+    --secondaryYellow: #ffe599;
+    --mainYellow: #FFBB25;
     --white: #F9FCFB;
     --grey: #E5E5E5;
-    
     --letterSpacing: -0.1rem;
 }
 
@@ -12,6 +11,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+  background: var(--black);
 }
 
 .error {

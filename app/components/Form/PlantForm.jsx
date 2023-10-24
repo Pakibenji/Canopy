@@ -23,6 +23,7 @@ const PlantForm = () => {
     error: "",
   });
   const { city } = useContext(CityContext);
+  console.log(city)
 
   const handleSubmit = async (e) => {
     e.preventDefault();

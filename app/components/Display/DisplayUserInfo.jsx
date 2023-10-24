@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "../User.module.css"
+import styles from "../UserComponents/User.module.css"
 import { subTitle } from "@/app/fonts"
 const DisplayUserInfo = ({name, email, description, userImage}) => {
 
