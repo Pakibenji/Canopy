@@ -29,7 +29,7 @@
   padding: 0.5rem;
   border: 1px solid var(--mainYellow);
   border-radius: 0.5rem;
-  background: var(--black);
+  background: var(--secondaryYellow);
   text-align: center;
 }
 
@@ -38,7 +38,7 @@
   padding: 0.5rem;
   border: 1px solid var(--white);
   border-radius: 0.5rem;
-  background: var(--white);
+  background: var(--secondaryYellow);
   text-align: center;
 }
 
@@ -53,10 +53,10 @@
   width: 50%;
   margin: 0 auto;
   padding: 0.5rem;
-  border: 1px solid var(--grey);
+  border: none;
   border-radius: 0.5rem;
-  background: var(--white);
-  color: var(--secondaryGreen);
+  background: var(--mainYellow);
+  color: var(--black);
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;

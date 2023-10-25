@@ -6,4 +6,5 @@
     text-decoration: underline var(--mainYellow);
     text-underline-offset: 0.5rem;
     width: 70%;
+    color: var(--secondaryYellow)
 }

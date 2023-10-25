@@ -14,15 +14,21 @@ const AddPlantButton = () => {
     router.push("/plants/add");
   };
 
-  return (
-    <>
-      {session && (
-        <button onClick={handleAddPlant} className={styles.addPlant} disabled={isLoading}>
+  function displayButton() {
+    if (session) {
+      return (
+        <button
+          onClick={handleAddPlant}
+          className={styles.addPlant}
+          disabled={isLoading}
+        >
           <RiPlantFill className={styles.icon} />
         </button>
-      )}
-    </>
-  );
+      );
+    }
+  }
+
+  return <>{displayButton()}</>;
 };
 
 export default AddPlantButton;
