@@ -2,24 +2,33 @@ import React from "react";
 import styles from "./DisplayAllPlants.module.css";
 import { subTitle } from "@/app/fonts";
 import Link from "next/link";
+import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
 const DisplayAllPlants = ({ plant, session }) => {
-  const { name, type, plantImage, proprietary, userId } = plant;
+  const { plantImage, proprietary, userId, toBarter } = plant;
 
-  function isUser() {
+  const isUser = () => {
     if (session?.user?._id === userId) {
       return "My Plant";
-    } else {
-      return proprietary;
     }
-  }
+    return proprietary;
+  };
+
+  const isBarter = () => {
+    if (toBarter) return <RiCheckboxBlankCircleFill />;
+  };
 
   return (
     <div className={styles.plantContainer}>
       <Link href={`/plants/${plant._id}`}>
         <img className={styles.plantImage} src={plantImage} alt="plantImage" />
-        <p className={styles.plantProprietary} style={subTitle.style}>{isUser()}</p>
       </Link>
+      <div className={styles.bartAndProprietary}>
+        <p className={styles.plantProprietary} style={subTitle.style}>
+          {isUser()}
+        </p>
+        <div className={styles.barter}>{isBarter()}</div>
+      </div>
     </div>
   );
 };

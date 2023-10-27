@@ -1,29 +1,45 @@
 .plantContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    background: var(--mainYellow);
-    width: 75%;
-    margin: 0 auto;
-    border: 3px solid var(--mainYellow);
-    text-decoration: none;
-    margin: 1rem auto;
-  }
-  .plantContainer a {
-    text-decoration: none;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  background: var(--mainYellow);
+  width: 75%;
+  margin: 0 auto;
+  border: 3px solid var(--mainYellow);
+  text-decoration: none;
+  margin: 1rem auto;
+}
+.plantContainer a {
+  text-decoration: none;
+}
 
-  .plantImage {
-    width: 100%;
-  }
-  
-  .plantProprietary {
-    color: var(--black);
-    text-align: left;
-    font-size: 1rem;
-    margin-left: 1rem;
-    text-transform: uppercase;
-  }
-  
+.plantImage {
+  width: 100%;
+}
+.bartAndProprietary {
+  width: 100%;
+  height: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: auto 0;
+}
+
+.plantProprietary {
+  color: var(--black);
+  font-size: 1rem;
+  margin-left: 1rem;
+  text-transform: uppercase;
+}
+.barter {
+  color: var(--black);
+}
+.barter svg {
+  display: block;
+  align-items: center;
+  margin: auto 0
+}

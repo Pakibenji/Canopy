@@ -38,6 +38,7 @@ export const authOptions = {
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user._id = token._id;
+        session.user.userImage = token.userImage;
       }
       return session;
     },

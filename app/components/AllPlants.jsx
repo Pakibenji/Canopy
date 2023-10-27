@@ -13,7 +13,6 @@ const AllPlants = () => {
     status,
     error: sessionError,
   } = useSession({ fallback: <IsLoading /> });
-
   const getAllPlants = useCallback(async () => {
     try {
       const response = await fetch("/api/plants/all");

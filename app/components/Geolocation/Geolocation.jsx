@@ -7,6 +7,38 @@ const Geolocation = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const getUserPermission = () => {
+    navigator.permissions
+      .query({ name: "geolocation" })
+      .then((result) => {
+        if (result.state === "granted" || result.state === "prompt") {
+          showLocation();
+        }
+        if (result.state === "denied") {
+          setError("Location permission denied");
+        }
+        result.onchange = () => {
+          if (result.state === "granted" || result.state === "prompt") {
+            showLocation();
+          }
+          if (result.state === "denied") {
+            setError("Location permission denied");
+          }
+        };
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
+
+  const showLocation = () => {
+    if (!navigator.geolocation) {
+      setError("Geolocation is not supported by your browser");
+    } else {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }
+  };
+
   const onSuccess = useCallback(
     (location) => {
       setCoordinates({
@@ -27,14 +59,7 @@ const Geolocation = () => {
   );
 
   useEffect(() => {
-    if (!("geolocation" in navigator)) {
-      onError({
-        code: 0,
-        message: "Geolocation not supported",
-      });
-    }
-
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    getUserPermission();
   }, [onSuccess, onError]);
 
   return (
