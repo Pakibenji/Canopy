@@ -1,5 +1,35 @@
 .userInfoContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--mainYellow);
+  width: 75%;
+  margin: 0 auto;
+  border: 3px solid var(--secondaryYellow);
+}
+.userName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--black);
+  text-transform: Uppercase;
+  padding: 1rem 0;
+  letter-spacing: var(--letterSpacing);
+}
+.UserDescription {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: var(--black);
+  padding: 1rem 0;
+}
+.userImage {
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+}
+.buttonContainer {
+  display: flex;
 }

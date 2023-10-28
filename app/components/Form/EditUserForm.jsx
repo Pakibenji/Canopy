@@ -6,6 +6,7 @@ import FormButton from "./FormButton";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Button from "../Button";
 
 const EditUserForm = ({ user }) => {
   const { name, userImage, description, _id } = user;
@@ -43,7 +44,7 @@ const EditUserForm = ({ user }) => {
           message: "User successfully edited!",
           error: "",
         });
-        await update({ ...session, user: userData});
+        await update({ ...session, user: userData });
         setTimeout(() => {
           router.replace(`/dashboard${_id}`);
         }, 2000);
@@ -53,38 +54,47 @@ const EditUserForm = ({ user }) => {
     }
   };
 
+  const handleChangePassword = async () => {
+    router.push(`/dashboard/changepassword/${_id}`);
+  };
+
   return (
-    <form onSubmit={handleEditUser} className={styles.form}>
-      <FormField
-        label="Name"
-        type="text"
-        placeholder={name}
-        value={formData.name}
-        onChange={(value) => setFormData({ ...formData, name: value })}
-        required={true}
+    <>
+      <form onSubmit={handleEditUser} className={styles.form}>
+        <FormField
+          label="Name"
+          type="text"
+          placeholder={name}
+          value={formData.name}
+          onChange={(value) => setFormData({ ...formData, name: value })}
+          required={true}
+        />
+        <FormField
+          label="Image"
+          type="text"
+          placeholder={userImage}
+          value={formData.userImage}
+          onChange={(value) => setFormData({ ...formData, userImage: value })}
+        />
+        <FormField
+          label="Description"
+          type="text"
+          placeholder={description}
+          value={formData.description}
+          onChange={(value) => setFormData({ ...formData, description: value })}
+        />
+        <DisplayErrorOrMessage
+          error={formData.error}
+          message={formData.message}
+        />
+        <FormButton type="submit" name="Update" />
+      </form>
+      <Button
+        func={handleChangePassword}
+        name="Change Password"
+        title="Change your password"
       />
-      <FormField
-        label="Image"
-        type="text"
-        placeholder={userImage}
-        value={formData.userImage}
-        onChange={(value) => setFormData({ ...formData, userImage: value })}
-      />
-      <FormField
-        label="Description"
-        type="text"
-        placeholder={description}
-        value={formData.description}
-        onChange={(value) =>
-          setFormData({ ...formData, description: value })
-        }
-      />
-      <DisplayErrorOrMessage
-        error={formData.error}
-        message={formData.message}
-      />
-      <FormButton type="submit" name="Update" />
-    </form>
+    </>
   );
 };
 

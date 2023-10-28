@@ -27,6 +27,7 @@ const EditUserPage = async ({ params }) => {
         Edit Account
       </h2>
       <EditUserForm user={user} />
+      
     </>
   );
 };
