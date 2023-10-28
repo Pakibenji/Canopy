@@ -1,10 +1,15 @@
-'use client';
+"use client";
 import React from "react";
 import styles from "./DisplayPlants.module.css";
 import { subTitle } from "../../fonts";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Button from "../Button";
+import {
+  deletePlant,
+  handleToEditPlantPage,
+  toggleToBarter,
+} from "@/utils/plantCrud/plantCrudIndex";
 
 const DisplayPlant = ({ plant }) => {
   const { data: session } = useSession();
@@ -14,56 +19,28 @@ const DisplayPlant = ({ plant }) => {
   const isProprietary = () => userId === plant.userId;
   const isToBarter = () => plant.toBarter;
 
-  const deletePlant = async () => {
+  const handleDeletePlant = () => {
     if (!isProprietary()) {
       alert("You are not authorized to delete this plant");
       return;
     }
-    const { _id } = plant;
-    if (confirm("Are you sure you want to delete this plant?")) {
-      const res = await fetch(`/api/plants/delete/${_id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.status === 200) {
-        alert("Plant deleted successfully");
-        router.push("/");
-      } else {
-        alert("Plant could not be deleted");
-      }
-    }
+    deletePlant(plant, router);
   };
 
-  const editPlant = () => {
+  const handleEditPlant = () => {
     if (!isProprietary()) {
       alert("You are not authorized to edit this plant");
       return;
     }
-    const { _id } = plant;
-    router.push(`/plants/${_id}/edit`);
+    handleToEditPlantPage(plant, router);
   };
 
-  const toggleToBarter = async () => {
+  const handleToggleToBarter = () => {
     if (!isProprietary()) {
       alert("You are not authorized to edit this plant");
       return;
     }
-    const { _id } = plant;
-    const res = await fetch(`/api/plants/edit/${_id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ toBarter: !isToBarter() }),
-    });
-    if (res.status === 200) {
-      alert("Plant edited successfully");
-      router.push("/");
-    } else {
-      alert("Plant could not be edited");
-    }
+    toggleToBarter(plant, isToBarter(), router);
   };
 
   const displayPlantDetail = () => {
@@ -82,28 +59,30 @@ const DisplayPlant = ({ plant }) => {
   };
 
   const displayButton = (func, name) => {
-    return (
-      <Button
-        func={func}
-        name={name}
-      />
-    );
+    return <Button func={func} name={name} />;
   };
 
   const displayButtons = () => {
-    return isProprietary() && (
-      <div className={styles.buttonContainer}>
-        {displayButton(deletePlant, "Delete")}
-        {displayButton(editPlant, "Edit")}
-      </div>
+    return (
+      isProprietary() && (
+        <div className={styles.buttonContainer}>
+          {displayButton(handleDeletePlant, "Delete")}
+          {displayButton(handleEditPlant, "Edit")}
+        </div>
+      )
     );
   };
 
   const displayToBarterButton = () => {
-    return isProprietary() && (
-      <div className={styles.buttonContainer}>
-        {displayButton(toggleToBarter, isToBarter() ? "Remove from barter" : "Add to barter")}
-      </div>
+    return (
+      isProprietary() && (
+        <div className={styles.buttonContainer}>
+          {displayButton(
+            handleToggleToBarter,
+            isToBarter() ? "Remove from barter" : "Add to barter"
+          )}
+        </div>
+      )
     );
   };
 

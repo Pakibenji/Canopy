@@ -8,6 +8,7 @@ import { validateName } from "@/utils/validation";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
 import { CityContext } from "@/app/context/geoLocationContext";
+import { createPlant } from "@/utils/plantCrud/plantCrudIndex";
 
 const PlantForm = () => {
   const { data: session } = useSession();
@@ -34,23 +35,15 @@ const PlantForm = () => {
       return;
     }
     try {
-      const res = await fetch("/api/plants/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          plantImage,
-          type,
-          description,
-          city,
-          userId,
-          proprietary,
-        }),
+      await createPlant({
+        name,
+        plantImage,
+        type,
+        description,
+        city,
+        userId,
+        proprietary,
       });
-      const json = await res.json();
-      if (!res.ok) throw Error(json.message);
       setFormData({
         ...formData,
         name: "",

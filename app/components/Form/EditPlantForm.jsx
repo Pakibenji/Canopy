@@ -5,6 +5,7 @@ import FormButton from "./FormButton";
 import FormField from "./FormField";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { useRouter } from "next/navigation";
+import { editPlant } from "@/utils/plantCrud/plantCrudIndex";
 
 const EditPlantForm = ({ plant }) => {
   const { name, plantImage, type, description } = plant;
@@ -27,28 +28,17 @@ const EditPlantForm = ({ plant }) => {
       description: updateFormData.description || plant.description,
     };
     try {
-      const response = await fetch(`/api/plants/edit/${plant._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(plantData),
+      const message = await editPlant(plantData, plant._id);
+      setUpdateFormData({
+        ...updateFormData,
+        message,
+        error: "",
       });
-      const data = await response.json();
-      if (data.error) {
-        setUpdateFormData({ ...updateFormData, error: data.error });
-      } else {
-        setUpdateFormData({
-          ...updateFormData,
-          message: "Plant successfully edited!",
-          error: "",
-        });
-        setTimeout(() => {
-          router.replace(`/plants/${plant._id}`);
-        }, 2000);
-      }
+      setTimeout(() => {
+        router.replace(`/plants/${plant._id}`);
+      }, 2000);
     } catch (error) {
-      console.log(error);
+      setUpdateFormData({ ...updateFormData, error: error.message });
     }
   };
 

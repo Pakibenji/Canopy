@@ -1,32 +1,15 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import IsLoading from "./IsLoading";
 import DisplayAllPlants from "./Display/DisplayAllPlants";
 import { useSession } from "next-auth/react";
+import usePlants from "@/utils/usePlants";
 
 const AllPlants = () => {
-  const [allPlantsArray, setAllPlantsArray] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-  const {
-    data: session,
-    status,
-    error: sessionError,
-  } = useSession({ fallback: <IsLoading /> });
-  const getAllPlants = useCallback(async () => {
-    try {
-      const response = await fetch("/api/plants/all");
-      const allPlants = await response.json();
-      setAllPlantsArray(allPlants);
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    getAllPlants();
-  }, [getAllPlants]);
+  const { allPlantsArray, isLoading, error } = usePlants();
+  const { data: session, error: sessionError } = useSession({
+    fallback: <IsLoading />,
+  });
 
   if (sessionError) {
     return <div>{sessionError.message}</div>;

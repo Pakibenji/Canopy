@@ -4,31 +4,29 @@ import { useSession } from "next-auth/react";
 import { RiPlantFill } from "react-icons/ri";
 import styles from "./AddPlantButton.module.css";
 import { useRouter } from "next/navigation";
+import { handleAddPlant } from "@/utils/plantCrud/plantCrudIndex";
 
 const AddPlantButton = () => {
   const { data: session, status } = useSession();
   const isLoading = status === "loading";
   const router = useRouter();
 
-  const handleAddPlant = () => {
-    router.push("/plants/add");
+  const addPlant = () => {
+    handleAddPlant(router);
   };
-
-  function displayButton() {
-    if (session) {
-      return (
+  return (
+    <>
+      {session && (
         <button
-          onClick={handleAddPlant}
           className={styles.addPlant}
+          onClick={addPlant}
           disabled={isLoading}
         >
           <RiPlantFill className={styles.icon} />
         </button>
-      );
-    }
-  }
-
-  return <>{displayButton()}</>;
+      )}
+    </>
+  );
 };
 
 export default AddPlantButton;
