@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "./Form.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -9,12 +9,13 @@ import FormButton from "./FormButton";
 import FormField from "./FormField";
 import usePlants from "@/utils/usePlants";
 import useGeolocation from "@/utils/useGeolocation";
+
 const PlantForm = () => {
   const { data: session } = useSession();
   const userId = session?.user?._id;
   const proprietary = session?.user?.name;
   const router = useRouter();
-  const {city }  = useGeolocation();
+  const  city  = useGeolocation();
   const [formData, setFormData] = useState({
     name: "",
     plantImage: "",
@@ -23,9 +24,11 @@ const PlantForm = () => {
     message: "",
     error: "",
   });
-  const create = usePlants();
-  console.log(city)
-
+  const {
+    createItem: createPlant,
+    error: createError,
+    message: createMessage,
+  } = usePlants("createPlant");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, plantImage, type, description } = formData;
@@ -35,7 +38,7 @@ const PlantForm = () => {
       return;
     }
     try {
-      await create("createPlant").createPlant({
+      await createPlant({
         name,
         plantImage,
         type,
@@ -94,8 +97,8 @@ const PlantForm = () => {
         onChange={(value) => setFormData({ ...formData, type: value })}
       />
       <DisplayErrorOrMessage
-        error={formData?.error || create.error}
-        message={formData?.message || create.message}
+        error={formData?.error || createError}
+        message={formData?.message || createMessage}
       />
       <FormButton type={"submit"} name={"Add plant"} />
     </form>

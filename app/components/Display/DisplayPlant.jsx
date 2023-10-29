@@ -5,16 +5,13 @@ import { subTitle } from "../../fonts";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Button from "../Button";
-import {
-  deletePlant,
-  handleToEditPlantPage,
-  toggleToBarter,
-} from "@/utils/plantCrud/plantCrudIndex";
+import usePlants from "@/utils/usePlants";
 
 const DisplayPlant = ({ plant }) => {
   const { data: session } = useSession();
   const userId = session?.user?._id;
   const router = useRouter();
+  const { deleteItem: deletePlant } = usePlants("deletePlant");
 
   const isProprietary = () => userId === plant.userId;
   const isToBarter = () => plant.toBarter;
@@ -24,7 +21,9 @@ const DisplayPlant = ({ plant }) => {
       alert("You are not authorized to delete this plant");
       return;
     }
-    deletePlant(plant, router);
+    deletePlant(plant._id);
+    alert("Plant deleted");
+    router.push("/");
   };
 
   const handleEditPlant = () => {

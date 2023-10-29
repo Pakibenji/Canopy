@@ -1,15 +1,24 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import IsLoading from "./IsLoading";
 import DisplayAllPlants from "./Display/DisplayAllPlants";
 import { useSession } from "next-auth/react";
 import usePlants from "@/utils/usePlants";
 
 const AllPlants = () => {
-  const { allPlantsArray, isLoading, error } = usePlants("allPlants");
+  const {
+    data: allPlantsArray,
+    isLoading,
+    error,
+    fetchData: getAllPlants,
+  } = usePlants("getAllPlants");
   const { data: session, error: sessionError } = useSession({
     fallback: <IsLoading />,
   });
+
+  useEffect(() => {
+    getAllPlants();
+  }, [getAllPlants]);
 
   if (sessionError) {
     return <div>{sessionError.message}</div>;
