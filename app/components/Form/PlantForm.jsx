@@ -7,14 +7,14 @@ import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { validateName } from "@/utils/validation";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
-import { CityContext } from "@/app/context/geoLocationContext";
-import { createPlant } from "@/utils/plantCrud/plantCrudIndex";
-
+import usePlants from "@/utils/usePlants";
+import useGeolocation from "@/utils/useGeolocation";
 const PlantForm = () => {
   const { data: session } = useSession();
   const userId = session?.user?._id;
   const proprietary = session?.user?.name;
   const router = useRouter();
+  const {city }  = useGeolocation();
   const [formData, setFormData] = useState({
     name: "",
     plantImage: "",
@@ -23,7 +23,7 @@ const PlantForm = () => {
     message: "",
     error: "",
   });
-  const { city } = useContext(CityContext);
+  const create = usePlants();
   console.log(city)
 
   const handleSubmit = async (e) => {
@@ -35,7 +35,7 @@ const PlantForm = () => {
       return;
     }
     try {
-      await createPlant({
+      await create("createPlant").createPlant({
         name,
         plantImage,
         type,
@@ -94,8 +94,8 @@ const PlantForm = () => {
         onChange={(value) => setFormData({ ...formData, type: value })}
       />
       <DisplayErrorOrMessage
-        error={formData?.error}
-        message={formData?.message}
+        error={formData?.error || create.error}
+        message={formData?.message || create.message}
       />
       <FormButton type={"submit"} name={"Add plant"} />
     </form>

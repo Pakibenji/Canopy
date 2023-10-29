@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import usePlants from "@/utils/usePlants";
 
 const AllPlants = () => {
-  const { allPlantsArray, isLoading, error } = usePlants();
+  const { allPlantsArray, isLoading, error } = usePlants("allPlants");
   const { data: session, error: sessionError } = useSession({
     fallback: <IsLoading />,
   });

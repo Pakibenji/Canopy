@@ -5,7 +5,6 @@ import Geolocation from "./components/Geolocation/Geolocation";
 export default function Home() {
   return (
     <>
-      <Geolocation />
       <AddPlantButton />
       <AllPlants />
     </>
