@@ -46,7 +46,7 @@ const EditUserForm = ({ user }) => {
         });
         await update({ ...session, user: userData });
         setTimeout(() => {
-          router.replace(`/dashboard${_id}`);
+          router.push(`/dashboard${_id}`);
         }, 2000);
       }
     } catch (error) {

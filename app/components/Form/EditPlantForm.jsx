@@ -5,7 +5,7 @@ import FormButton from "./FormButton";
 import FormField from "./FormField";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
 import { useRouter } from "next/navigation";
-import { editPlant } from "@/utils/plantCrud/plantCrudIndex";
+import usePlants from "@/utils/usePlants";
 
 const EditPlantForm = ({ plant }) => {
   const { name, plantImage, type, description } = plant;
@@ -18,6 +18,7 @@ const EditPlantForm = ({ plant }) => {
     message: "",
   });
   const router = useRouter();
+  const { updateItem: editPlant } = usePlants("editPlant");
 
   const handleEditPlant = async (e) => {
     e.preventDefault();
@@ -28,14 +29,14 @@ const EditPlantForm = ({ plant }) => {
       description: updateFormData.description || plant.description,
     };
     try {
-      const message = await editPlant(plantData, plant._id);
+      const message = await editPlant(plant._id, plantData);
       setUpdateFormData({
         ...updateFormData,
         message,
         error: "",
       });
       setTimeout(() => {
-        router.replace(`/plants/${plant._id}`);
+        router.push(`/plants/${plant._id}`);
       }, 2000);
     } catch (error) {
       setUpdateFormData({ ...updateFormData, error: error.message });
@@ -79,7 +80,7 @@ const EditPlantForm = ({ plant }) => {
       />
       <FormField
         label="Type"
-        type="text"
+        type="select"
         id="type"
         placeholder={type}
         value={updateFormData.type}

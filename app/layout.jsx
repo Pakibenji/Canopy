@@ -1,7 +1,6 @@
 import "./globals.css";
 import { body } from "./fonts";
 import { AuthProvider } from "./Provider";
-import { CityContextProvider } from "./context/geoLocationContext";
 import Header from "./components/LayoutComponents/Header";
 export const metadata = {
   title: "Jardin Calme",
@@ -14,10 +13,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body style={body.style}>
         <AuthProvider>
-          <CityContextProvider>
             <Header />
             {children}
-          </CityContextProvider>
         </AuthProvider>
       </body>
     </html>

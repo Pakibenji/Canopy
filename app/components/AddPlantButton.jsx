@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { RiPlantFill } from "react-icons/ri";
 import styles from "./AddPlantButton.module.css";
 import { useRouter } from "next/navigation";
-import { handleAddPlant } from "@/utils/plantCrud/plantCrudIndex";
 
 const AddPlantButton = () => {
   const { data: session, status } = useSession();
@@ -12,7 +11,12 @@ const AddPlantButton = () => {
   const router = useRouter();
 
   const addPlant = () => {
-    handleAddPlant(router);
+    if (!session) {
+      alert("You must be logged in to add a plant");
+      router.push("/login");
+      return;
+    }
+    router.push("/plants/add");
   };
   return (
     <>

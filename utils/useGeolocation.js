@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 
 const useGeolocation = () => {
   const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [city, setCity] = useState("");
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const useGeolocation = () => {
       return;
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }, []);
+  }, [navigator.geolocation]);
 
   const onError = (error) => {
     setError(error.message);
@@ -49,8 +49,6 @@ const useGeolocation = () => {
   useEffect(() => {
     if (coordinates) {
       getUserCity();
-      console.log(city);
-      console.log(coordinates);
     }
   }, [coordinates]);
 

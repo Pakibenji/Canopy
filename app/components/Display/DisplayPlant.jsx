@@ -6,45 +6,50 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Button from "../Button";
 import usePlants from "@/utils/usePlants";
+import { isProprietary } from "@/utils/helpers";
 
 const DisplayPlant = ({ plant }) => {
+  const { name, description, type, proprietary, plantImage } = plant;
   const { data: session } = useSession();
   const userId = session?.user?._id;
   const router = useRouter();
   const { deleteItem: deletePlant } = usePlants("deletePlant");
-
-  const isProprietary = () => userId === plant.userId;
+  const { toggleToBarter } = usePlants();
   const isToBarter = () => plant.toBarter;
 
   const handleDeletePlant = () => {
-    if (!isProprietary()) {
-      alert("You are not authorized to delete this plant");
-      return;
+    if (isProprietary(userId, plant)) {
+      deletePlant(plant);
+      alert("Plant deleted");
+      router.push(`/`);
+    } else {
+      alert("You are not the owner of this plant");
+      return router.push(`/`);
     }
-    deletePlant(plant._id);
-    alert("Plant deleted");
-    router.push("/");
   };
 
   const handleEditPlant = () => {
-    if (!isProprietary()) {
-      alert("You are not authorized to edit this plant");
-      return;
+    isProprietary(userId, plant) && router.push(`/plants/${plant._id}/edit`);
+    if (!isProprietary(userId, plant)) {
+      alert("You are not the owner of this plant");
+      return router.push(`/`);
     }
-    handleToEditPlantPage(plant, router);
   };
 
   const handleToggleToBarter = () => {
-    if (!isProprietary()) {
-      alert("You are not authorized to edit this plant");
-      return;
+    if (isProprietary(userId, plant)) {
+      toggleToBarter(plant, isToBarter());
+      alert(
+        isToBarter() ? "Plant removed to barter" : "Plant added from barter"
+      );
+    } else {
+      alert("You are not the owner of this plant");
+      return router.push(`/`);
     }
-    toggleToBarter(plant, isToBarter(), router);
   };
 
-  const displayPlantDetail = () => {
-    const { name, description, type, plantImage, proprietary } = plant;
-    return (
+  return (
+    <>
       <div className={styles.plantContainer}>
         <h3 style={subTitle.style} className={styles.plantName}>
           {name}
@@ -54,42 +59,21 @@ const DisplayPlant = ({ plant }) => {
         <p className={styles.plantType}>{type}</p>
         <p className={styles.plantProprietary}>{proprietary}</p>
       </div>
-    );
-  };
 
-  const displayButton = (func, name) => {
-    return <Button func={func} name={name} />;
-  };
-
-  const displayButtons = () => {
-    return (
-      isProprietary() && (
-        <div className={styles.buttonContainer}>
-          {displayButton(handleDeletePlant, "Delete")}
-          {displayButton(handleEditPlant, "Edit")}
-        </div>
-      )
-    );
-  };
-
-  const displayToBarterButton = () => {
-    return (
-      isProprietary() && (
-        <div className={styles.buttonContainer}>
-          {displayButton(
-            handleToggleToBarter,
-            isToBarter() ? "Remove from barter" : "Add to barter"
-          )}
-        </div>
-      )
-    );
-  };
-
-  return (
-    <>
-      {displayPlantDetail()}
-      {displayButtons()}
-      {displayToBarterButton()}
+      {isProprietary(userId, plant) && (
+        <>
+          <div className={styles.buttonContainer}>
+            <Button func={handleEditPlant} name="Edit" />
+            <Button func={handleDeletePlant} name="Delete" />
+          </div>
+          <div className={styles.buttonContainer}>
+            <Button
+              func={handleToggleToBarter}
+              name={isToBarter() ? "Remove from barter" : "Add to barter"}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };
