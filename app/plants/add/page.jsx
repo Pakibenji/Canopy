@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import PlantForm from "../../components/Form/PlantForm";
 import styles from "../../page.module.css";
