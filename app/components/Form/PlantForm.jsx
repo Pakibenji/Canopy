@@ -15,7 +15,7 @@ const PlantForm = () => {
   const userId = session?.user?._id;
   const proprietary = session?.user?.name;
   const router = useRouter();
-  const { city, getCurrentPosition } = useGeolocation();
+  const { city, getCurrentPosition} = useGeolocation();
   const [formData, setFormData] = useState({
     name: "",
     plantImage: "",

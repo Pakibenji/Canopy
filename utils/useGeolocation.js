@@ -7,6 +7,24 @@ const useGeolocation = () => {
   const [error, setError] = useState("");
   const [city, setCity] = useState("");
 
+  // a function for get authorization to allow the browser to get the user's location
+
+  const getAuthorization = () => {
+    if (!navigator.permissions) {
+      setError("Geolocation is not supported.");
+      return;
+    }
+    navigator.permissions.query({ name: "geolocation" }).then((permission) => {
+      if (permission.state === "granted") {
+        getCurrentPosition();
+      } else if (permission.state === "prompt") {
+        getCurrentPosition();
+      } else if (permission.state === "denied") {
+        setError("Please enable location services to use this feature.");
+      }
+    });
+  };
+
   const getCurrentPosition = () => {
     if (!navigator.geolocation) {
       setError("Geolocation is not supported.");
@@ -52,7 +70,7 @@ const useGeolocation = () => {
     }
   }, [coordinates]);
 
-  return { city, getCurrentPosition };
+  return { city, getCurrentPosition, getAuthorization };
 };
 
 export default useGeolocation;
