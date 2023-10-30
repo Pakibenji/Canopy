@@ -59,7 +59,6 @@ const DisplayPlant = ({ plant }) => {
         <p className={styles.plantType}>{type}</p>
         <p className={styles.plantProprietary}>{proprietary}</p>
       </div>
-
       {isProprietary(userId, plant) && (
         <>
           <div className={styles.buttonContainer}>

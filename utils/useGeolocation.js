@@ -6,6 +6,7 @@ const useGeolocation = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [city, setCity] = useState("");
+  const navigator = window.navigator;
 
   useEffect(() => {
     if (!navigator.geolocation) {
