@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Form.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ const PlantForm = () => {
   const userId = session?.user?._id;
   const proprietary = session?.user?.name;
   const router = useRouter();
-  const  city  = useGeolocation();
+  const { city, getCurrentPosition } = useGeolocation();
   const [formData, setFormData] = useState({
     name: "",
     plantImage: "",
@@ -61,6 +61,10 @@ const PlantForm = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getCurrentPosition();
+  }, []);
 
   return (
     <form action="" className={styles.form} onSubmit={handleSubmit}>

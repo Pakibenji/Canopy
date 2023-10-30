@@ -7,13 +7,13 @@ const useGeolocation = () => {
   const [error, setError] = useState("");
   const [city, setCity] = useState("");
 
-  useEffect(() => {
+  const getCurrentPosition = () => {
     if (!navigator.geolocation) {
       setError("Geolocation is not supported.");
       return;
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }, [navigator.geolocation]);
+  };
 
   const onError = (error) => {
     setError(error.message);
@@ -52,7 +52,7 @@ const useGeolocation = () => {
     }
   }, [coordinates]);
 
-  return city;
+  return { city, getCurrentPosition };
 };
 
 export default useGeolocation;
