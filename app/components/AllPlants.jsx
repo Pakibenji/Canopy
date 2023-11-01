@@ -15,10 +15,9 @@ const AllPlants = () => {
   const { data: session, error: sessionError } = useSession({
     fallback: <IsLoading />,
   });
-
   useEffect(() => {
     getAllPlants();
-  }, [getAllPlants]);
+  }, []);
 
   if (sessionError) {
     return <div>{sessionError.message}</div>;

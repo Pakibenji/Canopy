@@ -20,7 +20,7 @@ const usePlants = (action) => {
     throw Error("Failed to update plant");
   };
   return {
-    toggleToBarter
+    toggleToBarter,
   };
 };
 

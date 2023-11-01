@@ -1,5 +1,5 @@
-'use client';
-import { useState, useCallback } from "react";
+"use client";
+import { useState } from "react";
 
 const useCrud = (apiUrl) => {
   const [data, setData] = useState([]);
@@ -7,22 +7,17 @@ const useCrud = (apiUrl) => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  const fetchData = useCallback(async () => {
-    setIsLoading(true);
-    setError("");
+  const fetchData = async () => {
     try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const result = await response.json();
-      setData(result);
-    } catch (error) {
-      setError(error.message);
-    } finally {
+      const res = await fetch(apiUrl);
+      const json = await res.json();
+      if (!res.ok) throw Error(json.message);
+      setData(json);
       setIsLoading(false);
+    } catch (error) {
+      setError(error);
     }
-  }, [apiUrl]);
+  };
 
   const createItem = async (itemData) => {
     try {

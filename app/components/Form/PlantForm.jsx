@@ -4,18 +4,18 @@ import styles from "./Form.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import DisplayErrorOrMessage from "../Display/DisplayErrorOrMessage";
-import { validateName } from "@/utils/validation";
 import FormButton from "./FormButton";
 import FormField from "./FormField";
 import usePlants from "@/utils/usePlants";
 import useGeolocation from "@/utils/useGeolocation";
+import useValidation from "@/utils/useValidation";
 
 const PlantForm = () => {
   const { data: session } = useSession();
   const userId = session?.user?._id;
   const proprietary = session?.user?.name;
   const router = useRouter();
-  const { city, getCurrentPosition} = useGeolocation();
+  const { city, getCurrentPosition } = useGeolocation();
   const [formData, setFormData] = useState({
     name: "",
     plantImage: "",
@@ -29,14 +29,13 @@ const PlantForm = () => {
     error: createError,
     message: createMessage,
   } = usePlants("createPlant");
+  const { errors, validateField, clearFieldError } = useValidation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, plantImage, type, description } = formData;
-    const nameError = validateName(name);
-    if (nameError) {
-      setFormData({ ...formData, error: nameError });
-      return;
-    }
+    validateField("name", name);
+    if (errors?.name) return;
     try {
       await createPlant({
         name,
@@ -73,7 +72,11 @@ const PlantForm = () => {
         type="text"
         id="name"
         value={formData.name}
-        onChange={(value) => setFormData({ ...formData, name: value })}
+        onChange={(value) => {
+          clearFieldError("name");
+          validateField("name", value);
+          setFormData({ ...formData, name: value });
+        }}
         required={true}
       />
       <FormField
@@ -101,8 +104,8 @@ const PlantForm = () => {
         onChange={(value) => setFormData({ ...formData, type: value })}
       />
       <DisplayErrorOrMessage
-        error={formData?.error || createError}
-        message={formData?.message || createMessage}
+        error={createError || formData?.error || errors?.name}
+        message={createMessage || formData?.message}
       />
       <FormButton type={"submit"} name={"Add plant"} />
     </form>

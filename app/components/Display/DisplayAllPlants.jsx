@@ -5,7 +5,7 @@ import Link from "next/link";
 import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
 const DisplayAllPlants = ({ plant, session }) => {
-  const { plantImage, proprietary, userId, toBarter } = plant;
+  const { _id, plantImage, proprietary, userId, toBarter } = plant;
 
   const isUser = () => {
     if (session?.user?._id === userId) {
@@ -20,7 +20,7 @@ const DisplayAllPlants = ({ plant, session }) => {
 
   return (
     <div className={styles.plantContainer}>
-      <Link href={`/plants/${plant._id}`}>
+      <Link href={`/plants/${_id}`}>
         <img className={styles.plantImage} src={plantImage} alt="plantImage" />
       </Link>
       <div className={styles.bartAndProprietary}>

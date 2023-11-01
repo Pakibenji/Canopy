@@ -19,7 +19,8 @@ const DisplayPlant = ({ plant }) => {
 
   const handleDeletePlant = () => {
     if (isProprietary(userId, plant)) {
-      deletePlant(plant);
+      deletePlant(plant._id);
+      confirm("Are you sure you want to delete this plant?");
       alert("Plant deleted");
       router.push(`/`);
     } else {
@@ -42,6 +43,7 @@ const DisplayPlant = ({ plant }) => {
       alert(
         isToBarter() ? "Plant removed to barter" : "Plant added from barter"
       );
+      router.refresh();
     } else {
       alert("You are not the owner of this plant");
       return router.push(`/`);

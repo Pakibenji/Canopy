@@ -36,7 +36,8 @@ const EditPlantForm = ({ plant }) => {
         error: "",
       });
       setTimeout(() => {
-        router.push(`/plants/${plant._id}`);
+        router.refresh(`/`);
+        router.replace(`/plants/${plant._id}`);
       }, 2000);
     } catch (error) {
       setUpdateFormData({ ...updateFormData, error: error.message });

@@ -7,8 +7,6 @@ const useGeolocation = () => {
   const [error, setError] = useState("");
   const [city, setCity] = useState("");
 
-  // a function for get authorization to allow the browser to get the user's location
-
   const getAuthorization = () => {
     if (!navigator.permissions) {
       setError("Geolocation is not supported.");
